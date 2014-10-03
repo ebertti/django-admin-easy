@@ -1,7 +1,7 @@
-requery
-=======
+django-admin-easy
+=================
 
-Simple way to store and use queries in database for use of DBA in Django Admin
+Collection of admin fields to help to create computed or custom fields more friendly and easy way
 
 Installation
 ------------
