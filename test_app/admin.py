@@ -1,6 +1,6 @@
 # coding: utf-8
 from django.contrib import admin
-from easy.admin.field import LinkChangeListAdminField, ForeignKeyAdminField
+from easy.admin.field import LinkChangeListAdminField, ForeignKeyAdminField, BooleanAdminField
 from test_app.models import Choice, Question, Poll
 
 
@@ -10,7 +10,7 @@ class ChoiceInline(admin.StackedInline):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('poll_link', 'question_text', 'pub_date',)
+    list_display = ('id', 'poll_link', 'bool_sample', 'question_text', 'pub_date',)
     list_filter = ('pub_date',)
     search_fields = ('question_text',)
     fieldsets = (
@@ -26,6 +26,7 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = (ChoiceInline,)
 
     poll_link = ForeignKeyAdminField('poll')
+    bool_sample = BooleanAdminField(lambda x: x.id == 1, 'First')
 
 
 class PollAdmin(admin.ModelAdmin):

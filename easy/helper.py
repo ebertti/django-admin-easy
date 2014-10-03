@@ -17,10 +17,10 @@ def deep_getattribute(obj, attr):
 
 
 def call_or_get(obj, attr, default=None):
-    ret = None
+    ret = Nothing()
     if hasattr(attr, '__call__'):
         ret = attr(obj)
-    if not ret:
+    if isinstance(ret, Nothing):
         value = deep_getattribute(obj, attr)
         if hasattr(value, '__call__'):
             ret = value()
