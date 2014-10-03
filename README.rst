@@ -3,6 +3,9 @@ django-admin-easy
 
 Collection of admin fields to help to create computed or custom fields more friendly and easy way
 
+.. image:: https://pypip.in/v/django-admin-easy/badge.png
+.. image:: https://pypip.in/d/django-admin-easy/badge.png
+
 Installation
 ------------
 
