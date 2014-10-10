@@ -8,4 +8,4 @@ install:
   - pip install coveralls
 
 script:
-  - coverage run --source=easy
+  - coverage run --source=easy manage.py test
