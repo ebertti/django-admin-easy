@@ -1,7 +1,7 @@
 # coding: utf-8
 
 
-class Nothing():
+class Nothing(object):
     def __str__(self):
         return 'Error'
 

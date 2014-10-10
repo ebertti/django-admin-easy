@@ -12,6 +12,9 @@ Collection of admin fields to help to create computed or custom fields more frie
 .. image:: https://coveralls.io/repos/ebertti/django-admin-easy/badge.png
  :target: https://coveralls.io/r/ebertti/django-admin-easy
 
+.. image:: https://landscape.io/github/ebertti/django-admin-easy/master/landscape.png
+   :target: https://landscape.io/github/ebertti/django-admin-easy/master
+
 Installation
 ------------
 
@@ -47,7 +50,7 @@ in your admin file
         custom8 = easy.TemplateAdminField('test.html', 'shorty description', 'order_field')
 
         # render to change_list of another model with a filter on query
-        custom9 = easy.TestLinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text', {'field_name':'field_to_query'})
+        custom9 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text', {'field_name':'field_to_query'})
 
 
 If you want to use on admin form to show some information,

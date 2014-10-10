@@ -17,7 +17,7 @@ class BaseAdminField(object):
             self.allow_tags = allow_tags
 
     def render(self, obj):
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def __call__(self, obj):
         return self.render(obj)
@@ -84,7 +84,7 @@ class LinkChangeListAdminField(BaseAdminField):
     def render(self, obj):
         text = helper.call_or_get(obj, self.attr)
         p_params = {}
-        for key, value in self.params.items():
+        for key in self.params.keys():
             p_params[key] = helper.call_or_get(obj, self.attr)
 
         return '<a href="%s">%s</a>' % (
