@@ -1,7 +1,7 @@
 django-admin-easy
 =================
 
-Collection of admin fields to help to create computed or custom fields more friendly and easy way
+Collection of admin fields and decorators to help to create computed or custom fields more friendly and easy way
 
 .. image:: https://pypip.in/v/django-admin-easy/badge.png
  :target: http://pypi.python.org/pypi/requery
@@ -55,6 +55,18 @@ in your admin file
         # render to change_list of another model with a filter on query
         custom9 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text', {'field_name':'field_to_query'})
 
+        @east.smart(short_description='Field Description 10', admin_order_field='model_field')
+        def custom10(self, obj):
+            return obj.something_cool()
+
+        @east.smart(short_description='Field Description 11', admin_order_field='model_field', allow_tags=True)
+        def custom11(self, obj):
+            return '<b>' + obj.model_field + '</b>'
+
+        @east.smart(short_description='Field Description 12', admin_order_field='model_field', boolean=True)
+        def custom12(self, obj):
+            return obj.model_field > 10
+
 
 If you want to use on admin form to show some information,
 don't forget to add your custom field on ``readonly_fields`` attribute of your admin class
@@ -70,7 +82,6 @@ don't forget to add your custom field on ``readonly_fields`` attribute of your a
 
         custom1 = easy.ForeignKeyAdminField('related')
         # ...
-
 
 
 Screenshot

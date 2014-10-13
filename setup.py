@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-admin-easy',
-    version='0.1.1',
+    version='0.1.5',
     url='http://github.com/ebertti/django-admin-easy/',
     author='Ezequiel Bertti',
     author_email='ebertti@gmail.com',
@@ -12,7 +12,7 @@ setup(
     include_package_data=True,
     license='MIT License',
     platforms=['OS Independent'],
-    description="Collection of admin fields to help to create computed or custom fields more friendly and easy way",
+    description="Collection of admin fields and decorators to help to create computed or custom fields more friendly and easy way",
     long_description=(open('README.rst').read()),
     keywords='admin field fields django easy simple',
     classifiers=[

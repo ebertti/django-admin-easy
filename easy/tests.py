@@ -2,6 +2,7 @@
 from django import test
 from model_mommy import mommy
 import easy
+from easy.helper import Nothing
 from test_app.models import Question, Poll
 
 
@@ -105,3 +106,25 @@ class TestLinkChangeListAdminField(test.TestCase):
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
 
+
+class TestNothing(test.TestCase):
+
+    def test_nothing(self):
+        nothing = Nothing()
+
+        self.assertEqual(str(nothing), 'Error')
+        self.assertEqual(unicode(nothing), u'Error')
+
+
+class TestSmartDecorator(test.TestCase):
+    def test_link(self):
+
+        @easy.smart(short_description='test', admin_order_field='test_field', allow_tags=True, boolean=True)
+        def field(self, obj):
+            return obj
+
+        self.assertEqual(field.short_description, 'test')
+        self.assertEqual(field.admin_order_field, 'test_field')
+        self.assertEqual(field.allow_tags, True)
+        self.assertEqual(field.boolean, True)
+        self.assertEqual(field(object(), 1), 1)
