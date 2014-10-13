@@ -55,15 +55,15 @@ in your admin file
         # render to change_list of another model with a filter on query
         custom9 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text', {'field_name':'field_to_query'})
 
-        @east.smart(short_description='Field Description 10', admin_order_field='model_field')
+        @easy.smart(short_description='Field Description 10', admin_order_field='model_field')
         def custom10(self, obj):
             return obj.something_cool()
 
-        @east.smart(short_description='Field Description 11', admin_order_field='model_field', allow_tags=True)
+        @easy.smart(short_description='Field Description 11', admin_order_field='model_field', allow_tags=True)
         def custom11(self, obj):
             return '<b>' + obj.model_field + '</b>'
 
-        @east.smart(short_description='Field Description 12', admin_order_field='model_field', boolean=True)
+        @easy.smart(short_description='Field Description 12', admin_order_field='model_field', boolean=True)
         def custom12(self, obj):
             return obj.model_field > 10
 
