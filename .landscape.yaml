@@ -1,0 +1,8 @@
+uses:
+    - django
+autodetect: true
+ignore-paths:
+    - docs
+    - screenshot
+    - test_app
+    - test_project
