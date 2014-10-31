@@ -1,2 +1,2 @@
-from admin.field import *
-from admin.decorators import *
+from .admin.field import *
+from .admin.decorators import *

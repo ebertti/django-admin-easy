@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-admin-easy',
-    version='0.1.5',
+    version='0.1.6',
     url='http://github.com/ebertti/django-admin-easy/',
     author='Ezequiel Bertti',
     author_email='ebertti@gmail.com',
@@ -25,6 +25,9 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
     ],
     zip_safe=False,
 )
+

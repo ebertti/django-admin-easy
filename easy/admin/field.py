@@ -1,5 +1,5 @@
 # coding: utf-8
-from urllib import urlencode
+from django.utils.six.moves.urllib.parse import urlencode
 from django.contrib.admin.templatetags.admin_urls import admin_urlname
 from django.core.urlresolvers import reverse
 from django.db.models import Model

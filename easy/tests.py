@@ -1,4 +1,5 @@
 # coding: utf-8
+from django.utils.six import u, b
 from django import test
 from model_mommy import mommy
 import easy
@@ -112,8 +113,8 @@ class TestNothing(test.TestCase):
     def test_nothing(self):
         nothing = Nothing()
 
-        self.assertEqual(str(nothing), 'Error')
-        self.assertEqual(unicode(nothing), u'Error')
+        self.assertEqual(nothing.__str__(), 'Error')
+        self.assertEqual(nothing.__unicode__(), u'Error')
 
 
 class TestSmartDecorator(test.TestCase):
