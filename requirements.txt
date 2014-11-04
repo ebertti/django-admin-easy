@@ -1,2 +1,4 @@
 django
 model-mommy
+sphinx
+Pillow
