@@ -27,3 +27,20 @@ def smart(**kwargs):
         return func
 
     return decorator
+
+FUNCTION_MAP = {
+    'desc': 'short_description',
+    'order': 'admin_order_field',
+    'bool': 'boolean',
+    'tags': 'allow_tags',
+}
+
+
+def short(**kwargs):
+    def decorator(func):
+        for key, value in kwargs.items():
+            if key in FUNCTION_MAP:
+                setattr(func, FUNCTION_MAP[key], value)
+        return func
+
+    return decorator
