@@ -2,7 +2,9 @@
 from django.utils.six.moves.urllib.parse import urlencode
 from django.contrib.admin.templatetags.admin_urls import admin_urlname
 from django.core.urlresolvers import reverse
-from django.db.models import Model
+from django.db.models import Model, ImageField as ModelImageField
+from django.forms.utils import flatatt
+from django.conf import settings
 from django.template.loader import render_to_string
 from easy import helper
 
@@ -85,7 +87,7 @@ class LinkChangeListAdminField(BaseAdminField):
         text = helper.call_or_get(obj, self.attr)
         p_params = {}
         for key in self.params.keys():
-            p_params[key] = helper.call_or_get(obj, self.attr)
+            p_params[key] = helper.call_or_get(obj, self.params[key])
 
         return '<a href="%s">%s</a>' % (
             reverse('admin:%s_%s_changelist' % (self.app, self.model)) + '?' + urlencode(p_params),
@@ -143,6 +145,30 @@ class TemplateAdminField(BaseAdminField):
         context = self.context.copy()
         context.update({'obj': obj})
         return render_to_string(self.template, context)
+
+
+class ImageAdminField(BaseAdminField):
+
+    def __init__(self, attr, params=None, short_description=None, admin_order_field=None):
+        self.attr = attr
+        self.params = params
+        super(ImageAdminField, self).__init__(short_description or attr, admin_order_field, True)
+
+    def render(self, obj):
+        src = helper.call_or_get(obj, self.attr)
+
+        if isinstance(src, ModelImageField):
+            src = settings.MEDIA_URL + src
+
+        p_params = {}
+        for key in self.params.keys():
+            p_params[key] = helper.call_or_get(obj, self.params[key])
+
+        p_params['src'] = src
+
+        return '<img%s/>' % (
+            flatatt(p_params)
+        )
 
 
 
