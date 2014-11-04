@@ -102,7 +102,25 @@ class TestLinkChangeListAdminField(test.TestCase):
         custom_field = easy.LinkChangeListAdminField('test_app', 'question', 'question_set.count', {'pool': 'id'})
         ret = custom_field(poll)
 
-        expected = u'<a href="/admin/test_app/question/?pool=0">0</a>'
+        expected = u'<a href="/admin/test_app/question/?pool=1">0</a>'
+
+        self.assertEqual(expected, ret)
+        self.assertTrue(custom_field.allow_tags)
+
+
+class TestImageField(test.TestCase):
+
+    def test_image_field(self):
+        question = mommy.make(
+            Question,
+            image='asd.jpg',
+            question_text='bla'
+        )
+
+        custom_field = easy.ImageAdminField('image', {'title': 'question_text'})
+        ret = custom_field(question)
+
+        expected = u'<img src="asd.jpg" title="bla"/>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
@@ -118,9 +136,25 @@ class TestNothing(test.TestCase):
 
 
 class TestSmartDecorator(test.TestCase):
-    def test_link(self):
+
+    def test_decorator(self):
 
         @easy.smart(short_description='test', admin_order_field='test_field', allow_tags=True, boolean=True)
+        def field(self, obj):
+            return obj
+
+        self.assertEqual(field.short_description, 'test')
+        self.assertEqual(field.admin_order_field, 'test_field')
+        self.assertEqual(field.allow_tags, True)
+        self.assertEqual(field.boolean, True)
+        self.assertEqual(field(object(), 1), 1)
+
+
+class TestShortDecorator(test.TestCase):
+
+    def test_decorator(self):
+
+        @easy.short(desc='test', order='test_field', tags=True, bool=True)
         def field(self, obj):
             return obj
 
