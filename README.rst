@@ -124,6 +124,9 @@ More Examples
         # render to change_list of another model with a filter on query
         custom9 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text', {'field_name':'field_to_query'})
 
+        # display image of some model
+        custom10 = easy.ImageAdminField('image', {'image_attrs':'attr_value'})
+
         @easy.smart(short_description='Field Description 10', admin_order_field='model_field')
         def custom10(self, obj):
             return obj.something_cool()
