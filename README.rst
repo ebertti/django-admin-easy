@@ -23,10 +23,79 @@ Installation
 
 1. ``pip install django-admin-easy``
 
-Usage
------
+How it Works
+------------
 
-in your admin file
+When you want to display a field on Django Admin, and this field doesn't exist in your Model
+or you need to compute some information, like a Image or Link, you will need to create a method on your ModelAdminClass like this:
+
+.. code-block:: python
+
+    from django.contrib import admin
+
+    class YourAdmin(admin.ModelAdmin):
+        fields = ('sum_method', 'some_img', 'is_true')
+
+        def sum_method(self, obj):
+            sum_result = obj.field1 + obj.field2 + obj.field3
+            return '<b>%s</b>' % sum_result
+        sum_method.short_description = 'Sum'
+        sum_method.admin_order_field = 'field1'
+        sum_method.allow_tags = True
+
+        def some_img(self, obj):
+            return '<img scr="%s">' % obj.image
+        some_img.short_description = 'image'
+        some_img.admin_order_field = 'id'
+        some_img.allow_tags = True
+
+        def is_true(self, obj)
+            return obj.value > 0
+        is_true.short_description = 'Positive'
+        is_true.admin_order_field = 'value'
+        is_true.boolean = True
+
+It takes to much lines! =D
+
+With **django-admin-easy** you can easy create this field with less lines:
+
+.. code-block:: python
+
+    from django.contrib import admin
+    import easy
+
+    class YourAdmin(admin.ModelAdmin):
+        fields = ('sum_method', 'some_img', 'is_true')
+
+        sum_method = easy.SimpleAdminField(lambda obj: '<b>%s</b>' % (obj.field1 + obj.field2 + obj.field3), 'Sum', 'field1', True)
+        some_img = easy.ImageAdminField('image', 'id')
+        is_true = easy.BooleanAdminField('Positive', 'value')
+
+If you still prefer using a custom method, you can use our decorators, like this:
+
+.. code-block:: python
+
+    from django.contrib import admin
+    import easy
+
+    class YourAdmin(admin.ModelAdmin):
+        fields = ('sum_method', 'some_img', 'is_true')
+
+        @easy.smart(short_description='Sum', admin_order_field='field1', allow_tags=True )
+        def sum_method(self, obj):
+            sum_result = obj.field1 + obj.field2 + obj.field3
+            return '<b>%s</b>' % sum_result
+
+        @easy.short(desc='image', order='id', tags=True)
+        def some_img(self, obj):
+            return '<img scr="%s">' % obj.image
+
+        @easy.short(desc='Positive', order='value', bool=True)
+        def is_true(self, obj)
+            return obj.value > 0
+
+More Examples
+-------------
 
 .. code-block:: python
 
