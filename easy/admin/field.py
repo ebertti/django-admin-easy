@@ -56,11 +56,15 @@ class BooleanAdminField(SimpleAdminField):
 
 class ForeignKeyAdminField(SimpleAdminField):
 
-    def __init__(self, attr, short_description=None, admin_order_field=None, default=None):
+    def __init__(self, attr, display=None, short_description=None, admin_order_field=None, default=None):
+        self.display = display
         super(ForeignKeyAdminField, self).__init__(attr, short_description, admin_order_field, True, default)
 
     def render(self, obj):
         ref = helper.call_or_get(obj, self.attr, self.default)
+        display = None
+        if self.display:
+            display = helper.call_or_get(obj, self.display, self.default)
 
         if isinstance(ref, Model):
             return '<a href="%s">%s</a>' % (
@@ -68,7 +72,7 @@ class ForeignKeyAdminField(SimpleAdminField):
                     admin_urlname(ref._meta, 'change'),
                     args=(ref.pk,)
                 ),
-                ref
+                display or ref
             )
 
         return self.default
