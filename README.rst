@@ -137,15 +137,15 @@ More Examples
         # display image of some model
         custom11 = easy.ImageAdminField('image', {'image_attrs':'attr_value'})
 
-        @easy.smart(short_description='Field Description 10', admin_order_field='model_field')
+        @easy.smart(short_description='Field Description 12', admin_order_field='model_field')
         def custom12(self, obj):
             return obj.something_cool()
 
-        @easy.smart(short_description='Field Description 11', admin_order_field='model_field', allow_tags=True)
+        @easy.short(desc='Field Description 13', order='model_field', tags=True)
         def custom13(self, obj):
             return '<b>' + obj.model_field + '</b>'
 
-        @easy.smart(short_description='Field Description 12', admin_order_field='model_field', boolean=True)
+        @easy.short(desc='Field Description 14', order='model_field', bool=True)
         def custom14(self, obj):
             return obj.model_field > 10
 
