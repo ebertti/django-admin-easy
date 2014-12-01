@@ -44,3 +44,11 @@ def short(**kwargs):
         return func
 
     return decorator
+
+
+def action(short_description):
+    def decorator(func):
+        func.short_description = short_description
+        return func
+
+    return decorator
