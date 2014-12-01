@@ -74,6 +74,34 @@ class TestForeignKeyAdminField(test.TestCase):
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
 
+    def test_foreignkey_display(self):
+        question = mommy.make(
+            Question,
+            question_text='Eba!'
+        )
+
+        custom_field = easy.ForeignKeyAdminField('poll', 'poll_id')
+        ret = custom_field(question)
+
+        expected = u'<a href="/admin/test_app/poll/1/">1</a>'
+
+        self.assertEqual(expected, ret)
+        self.assertTrue(custom_field.allow_tags)
+
+    def test_foreignkey_display_sub_property(self):
+        question = mommy.make(
+            Question,
+            question_text='Eba!'
+        )
+
+        custom_field = easy.ForeignKeyAdminField('poll', 'poll.id')
+        ret = custom_field(question)
+
+        expected = u'<a href="/admin/test_app/poll/1/">1</a>'
+
+        self.assertEqual(expected, ret)
+        self.assertTrue(custom_field.allow_tags)
+
 
 class TestTemplateAdminField(test.TestCase):
 
@@ -163,3 +191,13 @@ class TestShortDecorator(test.TestCase):
         self.assertEqual(field.allow_tags, True)
         self.assertEqual(field.boolean, True)
         self.assertEqual(field(object(), 1), 1)
+
+
+class TestActionDecorator(test.TestCase):
+
+    def test_decorator(self):
+        @easy.action('description')
+        def field(self, obj):
+            return obj
+
+        self.assertEqual(field.short_description, 'description')
