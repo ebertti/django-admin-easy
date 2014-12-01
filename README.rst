@@ -105,6 +105,13 @@ More Examples
     class YourAdmin(admin.ModelAdmin):
         list_fields = ('id', 'custom1', 'custom2', 'custom3' ... 'customN')
 
+        actions = ('simples_action',)
+
+        @easy.action('My Little Simple Magic Action')
+        def simple_action(self, request, queryset)
+            return queryset.update(magic=True)
+
+
         # render a value of field, method, property or your model or related model
         custom1 = easy.SimpleAdminField('model_field')
         custom1 = easy.SimpleAdminField('method_of_model')
@@ -118,25 +125,28 @@ More Examples
         # render foreignkey with link to change_form in admin
         custom7 = easy.ForeignKeyAdminField('related')
 
+        # render foreignkey with link to change_form in admin and related_id content as text
+        custom8 = easy.ForeignKeyAdminField('related', 'related_id')
+
         # render template
-        custom8 = easy.TemplateAdminField('test.html', 'shorty description', 'order_field')
+        custom9 = easy.TemplateAdminField('test.html', 'shorty description', 'order_field')
 
         # render to change_list of another model with a filter on query
-        custom9 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text', {'field_name':'field_to_query'})
+        custom10 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text', {'field_name':'field_to_query'})
 
         # display image of some model
-        custom10 = easy.ImageAdminField('image', {'image_attrs':'attr_value'})
+        custom11 = easy.ImageAdminField('image', {'image_attrs':'attr_value'})
 
         @easy.smart(short_description='Field Description 10', admin_order_field='model_field')
-        def custom10(self, obj):
+        def custom12(self, obj):
             return obj.something_cool()
 
         @easy.smart(short_description='Field Description 11', admin_order_field='model_field', allow_tags=True)
-        def custom11(self, obj):
+        def custom13(self, obj):
             return '<b>' + obj.model_field + '</b>'
 
         @easy.smart(short_description='Field Description 12', admin_order_field='model_field', boolean=True)
-        def custom12(self, obj):
+        def custom14(self, obj):
             return obj.model_field > 10
 
 
