@@ -3,19 +3,19 @@ django-admin-easy
 
 Collection of admin fields and decorators to help to create computed or custom fields more friendly and easy way
 
-.. image:: https://pypip.in/v/django-admin-easy/badge.png
+.. image:: https://pypip.in/v/django-admin-easy/badge.png?style=flat
  :target: http://pypi.python.org/pypi/django-admin-easy
 
-.. image:: https://pypip.in/d/django-admin-easy/badge.png
+.. image:: https://pypip.in/d/django-admin-easy/badge.png?style=flat
  :target: http://pypi.python.org/pypi/django-admin-easy
 
-.. image:: https://travis-ci.org/ebertti/django-admin-easy.svg?branch=master
+.. image:: https://travis-ci.org/ebertti/django-admin-easy.svg?branch=master&style=flat
  :target: https://travis-ci.org/ebertti/django-admin-easy
 
-.. image:: https://coveralls.io/repos/ebertti/django-admin-easy/badge.png?branch=master
+.. image:: https://coveralls.io/repos/ebertti/django-admin-easy/badge.png?branch=master&style=flat
  :target: https://coveralls.io/r/ebertti/django-admin-easy?branch=master
 
-.. image:: https://landscape.io/github/ebertti/django-admin-easy/master/landscape.png
+.. image:: https://landscape.io/github/ebertti/django-admin-easy/master/landscape.png?style=flat
    :target: https://landscape.io/github/ebertti/django-admin-easy/master
 
 Installation
