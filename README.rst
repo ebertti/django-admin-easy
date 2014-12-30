@@ -186,6 +186,6 @@ The django-admin-easy was original created by Ezequiel Bertti `@ebertti <https:/
 Changelog
 ---------
 
-- 0.2.1
+* 0.2.1
 
- - Fix for Django 1.7 from `@kevgathuku <https://github.com/kevgathuku>`_
+  * Fix for Django 1.7 from `@kevgathuku <https://github.com/kevgathuku>`_
