@@ -182,3 +182,10 @@ This project is still under development. Feedback and suggestions are very welco
 Authors
 -------
 The django-admin-easy was original created by Ezequiel Bertti `@ebertti <https://github.com/ebertti>`_ October 2014.
+
+Changelog
+---------
+
+- 0.2.1
+
+-- Fix for Django 1.7 from `@kevgathuku <https://github.com/kevgathuku>`_
