@@ -3,6 +3,9 @@ django-admin-easy
 
 Collection of admin fields and decorators to help to create computed or custom fields more friendly and easy way
 
+.. image:: https://d2weczhvl823v0.cloudfront.net/ebertti/django-admin-easy/trend.png
+ :target: https://bitdeli.com/free
+
 .. image:: https://pypip.in/v/django-admin-easy/badge.png?style=flat
  :target: http://pypi.python.org/pypi/django-admin-easy
 
