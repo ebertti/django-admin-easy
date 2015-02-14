@@ -1,10 +1,7 @@
 django-admin-easy
 =================
 
-Collection of admin fields and decorators to help to create computed or custom fields more friendly and easy way
-
-.. image:: https://d2weczhvl823v0.cloudfront.net/ebertti/django-admin-easy/trend.png
- :target: https://bitdeli.com/free
+Collection of admin fields, decorators and mixin to help to create computed or custom fields more friendly and easy way
 
 .. image:: https://pypip.in/v/django-admin-easy/badge.png?style=flat
  :target: http://pypi.python.org/pypi/django-admin-easy
@@ -168,6 +165,46 @@ don't forget to add your custom field on ``readonly_fields`` attribute of your a
         custom1 = easy.ForeignKeyAdminField('related')
         # ...
 
+Mixin
+-----
+
+To help you to create a custom view on django admin, we create de MixinEasyView for your Admin Classes
+
+.. code-block:: python
+
+    from django.contrib import admin
+    import easy
+
+    class MyModelAdmin(easy.MixinEasyView, admin.ModelAdmin):
+        # ...
+
+        def easy_view_jump(self, request, pk=None):
+            # do something here
+            return HttpResponse('something')
+
+To call this view, you can use this reverse:
+
+.. code-block:: python
+
+    from django.core.urlresolvers import reverse
+
+    # to do something with one object of a model
+    reverse('admin:myapp_mymodel_easy', args=(obj.pk, 'jump'))
+
+    # or to do something with a model
+    reverse('admin:myapp_mymodel_easy', args=('jump',))
+
+Or one HTML template
+
+.. code-block:: html
+
+    #<!-- to do something with one object of a model -->
+    {% url 'admin:myapp_mymodel_easy' obj.pk 'jump' %}
+
+    #<!-- or to do something with a model -->
+    {% url 'admin:myapp_mymodel_easy' 'jump' %}
+
+So easy, no?
 
 Screenshot
 ----------
@@ -188,6 +225,10 @@ The django-admin-easy was original created by Ezequiel Bertti `@ebertti <https:/
 
 Changelog
 ---------
+
+* 0.2.2
+
+  * Add MixinEasyView
 
 * 0.2.1
 
