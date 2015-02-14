@@ -7,17 +7,18 @@ from django.http.response import HttpResponseRedirect
 
 class MixinEasyViews(object):
 
+    def _get_info(self):
+        return self.model._meta.app_label, self.model._meta.model_name
+
     def get_urls(self):
         urls = super(MixinEasyViews, self).get_urls()
 
-        info = self.model._meta.app_label, self.model._meta.model_name
-
         easy_urls = [
             url(r'^(?P<pk>.+)/easy/(?P<action>.+)/$', self.admin_site.admin_view(self.easy_object_view),
-                name='%s_%s_easy' % info),
+                name='%s_%s_easy' % self._get_info()),
 
             url(r'^easy/(?P<action>.+)/$', self.admin_site.admin_view(self.easy_list_view),
-                name='%s_%s_easy' % info),
+                name='%s_%s_easy' % self._get_info()),
         ]
 
         return easy_urls + urls
@@ -32,8 +33,7 @@ class MixinEasyViews(object):
 
         self.message_user(request, 'Easy view %s not founded' % method_name, messages.ERROR)
 
-        info = self.model._meta.app_label, self.model._meta.model_name
-        redirect = reverse('admin:%s_%s_change' % info, args=(pk,))
+        redirect = reverse('admin:%s_%s_change' % self._get_info(), args=(pk,))
 
         return HttpResponseRedirect(redirect)
 
@@ -46,7 +46,6 @@ class MixinEasyViews(object):
 
         self.message_user(request, 'Easy view %s not founded' % method_name, messages.ERROR)
 
-        info = self.model._meta.app_label, self.model._meta.model_name
-        redirect = reverse('admin:%s_%s_changelist' % info,)
+        redirect = reverse('admin:%s_%s_changelist' % self._get_info(),)
 
         return HttpResponseRedirect(redirect)
