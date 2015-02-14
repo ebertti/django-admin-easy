@@ -1,9 +1,13 @@
 # coding: utf-8
-from django.utils.six import u, b
+from django.contrib.admin import AdminSite
+from django.contrib.sessions.backends.db import SessionStore
+from django.http.request import HttpRequest
 from django import test
 from model_mommy import mommy
+
 import easy
 from easy.helper import Nothing
+from test_app.admin import PollAdmin
 from test_app.models import Question, Poll
 
 
@@ -200,4 +204,48 @@ class TestActionDecorator(test.TestCase):
         def field(self, obj):
             return obj
 
+        self.assertEqual(field(self, 1), 1)
         self.assertEqual(field.short_description, 'description')
+
+
+class TestEasyView(test.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.admin = PollAdmin(Poll, AdminSite())
+        super(TestEasyView, cls).setUpClass()
+
+    def test_register_view(self):
+        views = self.admin.get_urls()
+        self.assertEqual(len(views), 7)
+
+    def test_exist_view(self):
+        request = HttpRequest()
+        response1 = self.admin.easy_list_view(request, 'test')
+        response2 = self.admin.easy_object_view(request, 1, 'test')
+
+        self.assertEqual(response1.status_code, 200)
+        self.assertEqual(response2.status_code, 200)
+
+    def test_not_exist_view(self):
+        from django.contrib.messages.storage import default_storage
+
+        request = HttpRequest()
+        request.session = SessionStore('asd')
+        request._messages = default_storage(request)
+
+        response1 = self.admin.easy_list_view(request, 'not')
+        response2 = self.admin.easy_object_view(request, 1, 'not')
+
+        self.assertEqual(response1.status_code, 302)
+        self.assertEqual(response2.status_code, 302)
+        self.assertEqual(len(request._messages._queued_messages), 2)
+
+
+
+
+
+
+
+
+
