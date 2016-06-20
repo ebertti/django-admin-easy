@@ -223,6 +223,15 @@ Please help us
 --------------
 This project is still under development. Feedback and suggestions are very welcome and I encourage you to use the `Issues list <http://github.com/ebertti/django-admin-easy/issues>`_ on Github to provide that feedback.
 
+.. image:: https://img.shields.io/github/issues/ebertti/django-admin-easy.svg
+   :target: https://github.com/ebertti/django-admin-easy/issues
+
+.. image:: https://img.shields.io/github/forks/ebertti/django-admin-easy.svg 
+   :target: https://github.com/ebertti/django-admin-easy/network
+
+.. image:: https://img.shields.io/github/stars/ebertti/django-admin-easy.svg
+   :target: https://github.com/ebertti/django-admin-easy/stargazers
+
 Authors
 -------
 The django-admin-easy was original created by Ezequiel Bertti `@ebertti <https://github.com/ebertti>`_ October 2014.
