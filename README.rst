@@ -1,16 +1,16 @@
 django-admin-easy
 =================
 
+Collection of admin fields, decorators and mixin to help to create computed or custom fields more friendly and easy way
+
 .. image:: https://badges.gitter.im/Join%20Chat.svg
    :alt: Join the chat at https://gitter.im/ebertti/django-admin-easy
    :target: https://gitter.im/ebertti/django-admin-easy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-Collection of admin fields, decorators and mixin to help to create computed or custom fields more friendly and easy way
-
-.. image:: https://pypip.in/v/django-admin-easy/badge.png?style=flat
+.. image:: https://img.shields.io/pypi/dm/django-admin-easy.svg?style=flat
  :target: http://pypi.python.org/pypi/django-admin-easy
 
-.. image:: https://pypip.in/d/django-admin-easy/badge.png?style=flat
+.. image:: https://img.shields.io/pypi/v/django-admin-easy.svg?style=flat
  :target: http://pypi.python.org/pypi/django-admin-easy
 
 .. image:: https://travis-ci.org/ebertti/django-admin-easy.svg?branch=master&style=flat
