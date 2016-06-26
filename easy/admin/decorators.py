@@ -5,8 +5,6 @@ from __future__ import (
 from functools import wraps
 from django import utils as django_utils
 from django.core.cache import cache as django_cache
-from django.template.backends.django import get_installed_libraries
-from django.template.library import import_library
 from django.utils.safestring import mark_safe
 
 from easy import helper

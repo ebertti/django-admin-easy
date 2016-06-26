@@ -5,6 +5,7 @@ from __future__ import (
 
 import uuid
 
+import django
 from django.contrib.admin import AdminSite
 from django.contrib.sessions.backends.db import SessionStore
 from django.http.request import HttpRequest
@@ -80,8 +81,10 @@ class TestForeignKeyAdminField(test.TestCase):
 
         custom_field = easy.ForeignKeyAdminField('poll')
         ret = custom_field(question)
-
-        expected = u'<a href="/admin/test_app/poll/1/change/">Poll object</a>'
+        if django.VERSION < (1, 10):
+            expected = u'<a href="/admin/test_app/poll/1/">Poll object</a>'
+        else :
+            expected = u'<a href="/admin/test_app/poll/1/change/">Poll object</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
@@ -94,8 +97,10 @@ class TestForeignKeyAdminField(test.TestCase):
 
         custom_field = easy.ForeignKeyAdminField('poll', 'poll_id')
         ret = custom_field(question)
-
-        expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
+        if django.VERSION < (1, 10):
+            expected = u'<a href="/admin/test_app/poll/1/">1</a>'
+        else:
+            expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
@@ -109,7 +114,10 @@ class TestForeignKeyAdminField(test.TestCase):
         custom_field = easy.ForeignKeyAdminField('poll', 'poll.id')
         ret = custom_field(question)
 
-        expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
+        if django.VERSION < (1, 10):
+            expected = u'<a href="/admin/test_app/poll/1/">1</a>'
+        else:
+            expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
@@ -250,8 +258,6 @@ class TestDjangoUtilsDecorator(test.TestCase):
         @easy.utils('text.slugify')
         @easy.utils('translation.gettext')
         @easy.utils('translation.ugettext')
-        @easy.utils('translation.gettext_lazy')
-        @easy.utils('translation.ugettext_lazy')
         @easy.utils('translation.gettext_noop')
         @easy.utils('translation.ugettext_noop')
         def field(self, obj):
@@ -376,7 +382,10 @@ class TestEasyView(test.TestCase):
 
     def test_register_view(self):
         views = self.admin.get_urls()
-        self.assertEqual(len(views), 8)
+        if django.VERSION < (1, 10):
+            self.assertEqual(len(views), 7)
+        else:
+            self.assertEqual(len(views), 8)
 
     def test_exist_view(self):
         request = HttpRequest()

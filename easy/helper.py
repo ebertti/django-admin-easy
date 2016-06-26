@@ -3,8 +3,7 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
-from django.template.backends.django import get_installed_libraries
-from django.template.library import import_library
+import django
 
 EASY_CACHE_TEMPLATE_METHOD = 'easy.{}.{}.{}'
 EASY_CACHE_TEMPLATE_OBJ = 'easy.{}.{}'
@@ -26,15 +25,27 @@ def deep_getattribute(obj, attr):
 
 def get_django_filter(filter, load='django'):
 
-    libraries = get_installed_libraries()
-    if load and not load == 'django':
-        library_path = libraries.get(load)
-        if not library_path:
-            raise Exception('templatetag "{}" is not registered'.format(load))
-    else:
-        library_path = 'django.template.defaultfilters'
+    if django.VERSION < (1, 10):
+        from django.template.base import get_library
+        if load and not load == 'django':
+            library = get_library(load)
+        else:
+            library_path = 'django.template.defaultfilters'
+            from django.template import import_library
+            library = import_library(library_path)
 
-    library = import_library(library_path)
+    else:
+        from django.template.backends.django import get_installed_libraries
+        from django.template.library import import_library
+        libraries = get_installed_libraries()
+        if load and not load == 'django':
+            library_path = libraries.get(load)
+            if not library_path:
+                raise Exception('templatetag "{}" is not registered'.format(load))
+        else:
+            library_path = 'django.template.defaultfilters'
+
+        library = import_library(library_path)
     filter_method = library.filters.get(filter)
     if not filter_method:
         raise Exception('filter "{}" not exist on {} templatetag package'.format(
