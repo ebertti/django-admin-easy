@@ -81,7 +81,7 @@ class TestForeignKeyAdminField(test.TestCase):
 
         custom_field = easy.ForeignKeyAdminField('poll')
         ret = custom_field(question)
-        if django.VERSION < (1, 10):
+        if django.VERSION < (1, 8):
             expected = u'<a href="/admin/test_app/poll/1/">Poll object</a>'
         else :
             expected = u'<a href="/admin/test_app/poll/1/change/">Poll object</a>'
@@ -97,7 +97,7 @@ class TestForeignKeyAdminField(test.TestCase):
 
         custom_field = easy.ForeignKeyAdminField('poll', 'poll_id')
         ret = custom_field(question)
-        if django.VERSION < (1, 10):
+        if django.VERSION < (1, 8):
             expected = u'<a href="/admin/test_app/poll/1/">1</a>'
         else:
             expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
@@ -114,7 +114,7 @@ class TestForeignKeyAdminField(test.TestCase):
         custom_field = easy.ForeignKeyAdminField('poll', 'poll.id')
         ret = custom_field(question)
 
-        if django.VERSION < (1, 10):
+        if django.VERSION < (1, 8):
             expected = u'<a href="/admin/test_app/poll/1/">1</a>'
         else:
             expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
@@ -382,7 +382,7 @@ class TestEasyView(test.TestCase):
 
     def test_register_view(self):
         views = self.admin.get_urls()
-        if django.VERSION < (1, 10):
+        if django.VERSION < (1, 8):
             self.assertEqual(len(views), 7)
         else:
             self.assertEqual(len(views), 8)
