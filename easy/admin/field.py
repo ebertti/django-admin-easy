@@ -182,7 +182,31 @@ class ImageAdminField(BaseAdminField):
             flatatt(p_params)
         )
 
+class FilterAdminField(SimpleAdminField):
+
+    def __init__(self, attr, filter, load=None, extra=None, short_description=None, admin_order_field=None, allow_tags=False, default=None):
+        self.filter = filter
+        self.load = load
+        self.extra = extra
+        super(FilterAdminField, self).__init__(attr, short_description, admin_order_field, allow_tags, default)
+
+    def render(self, obj):
+        value = super(FilterAdminField, self).render(obj)
+        filter_method = helper.get_django_filter(self.filter, self.load)
+        args = (self.extra) if self.extra else []
+        return filter_method(value, *args)
 
 
+class CacheAdminField(SimpleAdminField):
 
+    def __init__(self, attr, filter, load=None, extra=None, short_description=None, admin_order_field=None, allow_tags=False, default=None):
+        self.filter = filter
+        self.load = load
+        self.extra = extra
+        super(FilterAdminField, self).__init__(attr, short_description, admin_order_field, allow_tags, default)
 
+    def render(self, obj):
+        value = super(FilterAdminField, self).render(obj)
+        filter_method = helper.get_django_filter(self.filter, self.load)
+        args = (self.extra) if self.extra else []
+        return filter_method(value, *args)

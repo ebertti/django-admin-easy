@@ -25,7 +25,7 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 Installation
 ------------
 
-1. ``pip install django-admin-easy``
+1. ``pip install django-admin-easy==0.3``
 
 How it Works
 ------------
@@ -98,6 +98,96 @@ If you still prefer using a custom method, you can use our decorators, like this
         def is_true(self, obj)
             return obj.value > 0
 
+Another Decorators
+------------------
+
+In all of this extra decorators, you can use `short` or `smart` arguments to complement field information.
+
+ * Allow HTML tags
+
+.. code-block:: python
+
+    @easy.with_tags()
+    def some_field_with_html(self, obj)
+        return '<b>{}</b>'.format(obj.value)
+    # output some as: mark_safe("<b>something</b>")
+
+if value is `5`, will display:
+
+**5** and not `<b>5</b>` on admin page.
+
+ * Cached field
+
+ If you, for some reason, need to cache a custom field on admin
+
+ .. code-block:: python
+
+    @easy.cache(10)# in secondd, default is 60
+    def some_field_with_html(self, obj)
+        return obj.related.some_hard_word()
+
+If you change something on your model, or some related object, you can clean this cache using this easy way:
+
+ .. code-block:: python
+
+    import easy
+    # wherever you want
+    easy.cache_clear(my_model_instance)
+
+    # or
+    class MyModel(models.Model):
+        # ... fields
+
+        def save(*args, **kwargs):
+            easy.cache_clear(self)
+            super(MyModel, self).save(*args, **kwargs)
+
+
+ * Django template filter
+
+Can be used with all template filters on your project.
+
+.. code-block:: python
+
+    # builtin template filter like {{ value|title }}
+    @easy.filter('title')
+    def some_field_with_html(self, obj)
+        return 'ezequiel bertti'
+    # output: "Ezequiel Bertti"
+
+    # like {% load i10n %} and {{ value|localize }}
+    @easy.filter('localize', 'l10n')
+    def some_field_with_html(self, obj)
+        return 10000
+    # output: "10.000"
+
+    # like {{ value|date:'y-m-d' }}
+    @easy.filter('localize', 'default', 'y-m-d')
+    def some_field_with_html(self, obj)
+        return datetime(2016, 06, 28)
+    # output: "16-06-28"
+
+ * Django utils functions
+
+Tested with:
+
+.. code-block:: python
+
+    @easy.utils('html.escape')
+    @easy.utils('html.conditional_escape')
+    @easy.utils('html.strip_tags')
+    @easy.utils('safestring.mark_safe')
+    @easy.utils('safestring.mark_for_escaping')
+    @easy.utils('text.slugify')
+    @easy.utils('translation.gettext')
+    @easy.utils('translation.ugettext')
+    @easy.utils('translation.gettext_lazy')
+    @easy.utils('translation.ugettext_lazy')
+    @easy.utils('translation.gettext_noop')
+    @easy.utils('translation.ugettext_noop')
+    def your_method(self, obj):
+        return obj.value
+
 More Examples
 -------------
 
@@ -140,6 +230,11 @@ More Examples
 
         # display image of some model
         custom11 = easy.ImageAdminField('image', {'image_attrs':'attr_value'})
+
+        # use django template filter on a field
+        custom20 = easy.FilterAdminField('model_field', 'upper')
+        custom21 = easy.FilterAdminField('date_field', 'date', 'django', 'y-m-d')
+        custom21 = easy.FilterAdminField('float_field', 'localize', 'l18n')
 
         @easy.smart(short_description='Field Description 12', admin_order_field='model_field')
         def custom12(self, obj):
@@ -238,6 +333,13 @@ The django-admin-easy was original created by Ezequiel Bertti `@ebertti <https:/
 
 Changelog
 ---------
+
+* 0.3
+
+  * Add import from `__future__` on all files
+  * Django 1.10
+  * More decorators
+  * More admin fields
 
 * 0.2.2
 
