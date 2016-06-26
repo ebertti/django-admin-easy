@@ -7,11 +7,12 @@ python:
   - "3.4"
   - "3.5"
 
-matrix:
-  - DJANGO="Django<1.8" # 1.7
-  - DJANGO="Django<1.9" # 1.8
-  - DJANGO="Django<1.10" # 1.9
-  - DJANGO="Django<1.11" # 1.10
+env:
+  matrix:
+    - DJANGO="Django<1.8" # 1.7
+    - DJANGO="Django<1.9" # 1.8
+    - DJANGO="Django<1.10" # 1.9
+    - DJANGO="Django<1.11" # 1.10
 
 cache:
   directories:
