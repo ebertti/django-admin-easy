@@ -25,7 +25,7 @@ def deep_getattribute(obj, attr):
 
 def get_django_filter(filter, load='django'):
 
-    if django.VERSION < (1, 9):
+    if django.VERSION < (1, 8):
         from django.template.base import get_library
         if load and not load == 'django':
             library = get_library(load)
