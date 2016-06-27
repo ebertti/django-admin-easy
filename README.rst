@@ -337,6 +337,9 @@ This project is still under development. Feedback and suggestions are very welco
 .. image:: https://img.shields.io/github/issues/ebertti/django-admin-easy.svg
    :target: https://github.com/ebertti/django-admin-easy/issues
 
+.. image:: https://img.shields.io/waffle/label/ebertti/django-admin-easy/in%20progress.svg?maxAge=2592000
+   :target: https://waffle.io/ebertti/django-admin-easy
+
 .. image:: https://img.shields.io/github/forks/ebertti/django-admin-easy.svg 
    :target: https://github.com/ebertti/django-admin-easy/network
 
