@@ -15,6 +15,7 @@ setup(
     description="Collection of admin fields and decorators to help to create computed or custom fields more friendly and easy way",
     long_description=(open('README.rst').read()),
     keywords='admin field fields django easy simple',
+    test_suite="runtests.runtests",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django',
