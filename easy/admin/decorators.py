@@ -98,7 +98,7 @@ def filter(django_builtin_filter, load=None, *extra):
     return decorator
 
 
-def with_tags(**kwargs):
+def with_tags():
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):

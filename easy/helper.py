@@ -23,7 +23,7 @@ def deep_getattribute(obj, attr):
         obj = getattr(obj, i, Nothing())
     return obj
 
-def get_django_filter(filter, load='django'):
+def get_django_filter(django_filter, load='django'):
 
     if django.VERSION < (1, 9):
         from django.template.base import get_library
@@ -50,10 +50,10 @@ def get_django_filter(filter, load='django'):
             library_path = 'django.template.defaultfilters'
 
         library = import_library(library_path)
-    filter_method = library.filters.get(filter)
+    filter_method = library.filters.get(django_filter)
     if not filter_method:
         raise Exception('filter "{}" not exist on {} templatetag package'.format(
-            filter, load
+            django_filter, load
         ))
 
     return filter_method
