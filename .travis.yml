@@ -25,6 +25,14 @@ install:
 
 matrix:
   exclude:
+    - python: "3.4"
+      env: DJANGO="Django<1.6"
+    - python: "3.4"
+      env: DJANGO="Django<1.7"
+    - python: "3.5"
+      env: DJANGO="Django<1.6"
+    - python: "3.5"
+      env: DJANGO="Django<1.7"
     - python: "3.5"
       env: DJANGO="Django<1.8"
 
