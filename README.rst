@@ -37,7 +37,10 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 Installation
 ------------
 
-1. ``pip install django-admin-easy==0.3``
+1. Requirements: **Django > 1.5**
+
+2. ``pip install django-admin-easy==0.3``
+
 
 How it Works
 ------------
@@ -115,7 +118,7 @@ Another Decorators
 
 In all of this extra decorators, you can use `short` or `smart` arguments to complement field information.
 
- * Allow HTML tags
+ * **Allow HTML tags**
 
 .. code-block:: python
 
@@ -129,7 +132,7 @@ if value is `5`, will display:
 
 **5** and not `<b>5</b>` on admin page.
 
-* Cached field
+* **Cached field**
 
 If you, for some reason, need to cache a custom field on admin
 
@@ -156,7 +159,7 @@ If you change something on your model, or some related object, you can clean thi
             super(MyModel, self).save(*args, **kwargs)
 
 
-* Django template filter
+* **Django template filter**
 
 Can be used with all template filters on your project.
 
@@ -180,7 +183,7 @@ Can be used with all template filters on your project.
         return datetime(2016, 06, 28)
     # output: "16-06-28"
 
-* Django utils functions
+* **Django utils functions**
 
 Tested with:
 
