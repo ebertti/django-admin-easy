@@ -25,10 +25,10 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 .. image:: https://img.shields.io/pypi/status/django-admin-easy.svg?maxAge=2592000
   :target: http://pypi.python.org/pypi/django-admin-easy
 
-.. image:: https://travis-ci.org/ebertti/django-admin-easy.svg?branch=master&style=flat
+.. image:: https://img.shields.io/travis/ebertti/django-admin-easy/master.svg?maxAge=2592000
   :target: https://travis-ci.org/ebertti/django-admin-easy
 
-.. image:: https://coveralls.io/repos/ebertti/django-admin-easy/badge.png?branch=master&style=flat
+.. image:: https://img.shields.io/coveralls/ebertti/django-admin-easy/master.svg?maxAge=2592000
   :target: https://coveralls.io/r/ebertti/django-admin-easy?branch=master
 
 .. image:: https://landscape.io/github/ebertti/django-admin-easy/master/landscape.png?style=flat
