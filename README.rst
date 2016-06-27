@@ -118,7 +118,7 @@ Another Decorators
 
 In all of this extra decorators, you can use `short` or `smart` arguments to complement field information.
 
- * **Allow HTML tags**
+* **Allow HTML tags**
 
 .. code-block:: python
 
