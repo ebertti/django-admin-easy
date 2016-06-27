@@ -25,14 +25,18 @@ def deep_getattribute(obj, attr):
 
 def get_django_filter(filter, load='django'):
 
-    if django.VERSION < (1, 8):
+    if django.VERSION < (1, 9):
         from django.template.base import get_library
         if load and not load == 'django':
             library = get_library(load)
         else:
             library_path = 'django.template.defaultfilters'
-            from django.template import import_library
-            library = import_library(library_path)
+            if django.VERSION > (1, 8):
+                from django.template.base import import_library
+                library = import_library(library_path)
+            else:
+                from django.template import import_library
+                library = import_library(library_path)
 
     else:
         from django.template.backends.django import get_installed_libraries
@@ -72,10 +76,17 @@ def call_or_get(obj, attr, default=None):
     return ret
 
 
+def get_model_name(model):
+    if django.VERSION < (1, 6):
+        return model._meta.module_name
+    else:
+        return model._meta.model_name
+
+
 def cache_method_key(model, method_name):
     return EASY_CACHE_TEMPLATE_METHOD.format(
         model._meta.app_label,
-        model._meta.model_name,
+        get_model_name(model),
         method_name,
         model.pk
     )
@@ -84,6 +95,6 @@ def cache_method_key(model, method_name):
 def cache_object_key(model):
     return EASY_CACHE_TEMPLATE_OBJ.format(
         model._meta.app_label,
-        model._meta.model_name ,
+        get_model_name(model),
         model.pk
     )
