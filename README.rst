@@ -4,23 +4,35 @@ django-admin-easy
 Collection of admin fields, decorators and mixin to help to create computed or custom fields more friendly and easy way
 
 .. image:: https://badges.gitter.im/Join%20Chat.svg
-   :alt: Join the chat at https://gitter.im/ebertti/django-admin-easy
-   :target: https://gitter.im/ebertti/django-admin-easy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+  :alt: Join the chat at https://gitter.im/ebertti/django-admin-easy
+  :target: https://gitter.im/ebertti/django-admin-easy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
+.. image:: https://img.shields.io/badge/django-1.5%201.6%201.7%201.8%201.9%201.10-brightgreen.svg
+  :target: http://pypi.python.org/pypi/django-admin-easy
 
 .. image:: https://img.shields.io/pypi/dm/django-admin-easy.svg?style=flat
- :target: http://pypi.python.org/pypi/django-admin-easy
+  :target: http://pypi.python.org/pypi/django-admin-easy
 
 .. image:: https://img.shields.io/pypi/v/django-admin-easy.svg?style=flat
- :target: http://pypi.python.org/pypi/django-admin-easy
+  :target: http://pypi.python.org/pypi/django-admin-easy
+
+.. image:: https://img.shields.io/pypi/pyversions/django-admin-easy.svg?maxAge=2592000
+  :target: http://pypi.python.org/pypi/django-admin-easy
+
+.. image:: https://img.shields.io/pypi/format/django-admin-easy.svg?maxAge=2592000
+  :target: http://pypi.python.org/pypi/django-admin-easy
+
+.. image:: https://img.shields.io/pypi/status/django-admin-easy.svg?maxAge=2592000
+  :target: http://pypi.python.org/pypi/django-admin-easy
 
 .. image:: https://travis-ci.org/ebertti/django-admin-easy.svg?branch=master&style=flat
- :target: https://travis-ci.org/ebertti/django-admin-easy
+  :target: https://travis-ci.org/ebertti/django-admin-easy
 
 .. image:: https://coveralls.io/repos/ebertti/django-admin-easy/badge.png?branch=master&style=flat
- :target: https://coveralls.io/r/ebertti/django-admin-easy?branch=master
+  :target: https://coveralls.io/r/ebertti/django-admin-easy?branch=master
 
 .. image:: https://landscape.io/github/ebertti/django-admin-easy/master/landscape.png?style=flat
-   :target: https://landscape.io/github/ebertti/django-admin-easy/master
+  :target: https://landscape.io/github/ebertti/django-admin-easy/master
 
 Installation
 ------------
@@ -112,15 +124,16 @@ In all of this extra decorators, you can use `short` or `smart` arguments to com
         return '<b>{}</b>'.format(obj.value)
     # output some as: mark_safe("<b>something</b>")
 
+
 if value is `5`, will display:
 
 **5** and not `<b>5</b>` on admin page.
 
- * Cached field
+* Cached field
 
- If you, for some reason, need to cache a custom field on admin
+If you, for some reason, need to cache a custom field on admin
 
- .. code-block:: python
+.. code-block:: python
 
     @easy.cache(10)# in secondd, default is 60
     def some_field_with_html(self, obj)
@@ -128,7 +141,7 @@ if value is `5`, will display:
 
 If you change something on your model, or some related object, you can clean this cache using this easy way:
 
- .. code-block:: python
+.. code-block:: python
 
     import easy
     # wherever you want
@@ -143,7 +156,7 @@ If you change something on your model, or some related object, you can clean thi
             super(MyModel, self).save(*args, **kwargs)
 
 
- * Django template filter
+* Django template filter
 
 Can be used with all template filters on your project.
 
@@ -167,7 +180,7 @@ Can be used with all template filters on your project.
         return datetime(2016, 06, 28)
     # output: "16-06-28"
 
- * Django utils functions
+* Django utils functions
 
 Tested with:
 
