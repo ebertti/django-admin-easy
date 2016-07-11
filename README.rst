@@ -71,7 +71,7 @@ or you need to compute some information, like a Image or Link, you will need to 
         some_img.admin_order_field = 'id'
         some_img.allow_tags = True
 
-        def is_true(self, obj)
+        def is_true(self, obj):
             return obj.value > 0
         is_true.short_description = 'Positive'
         is_true.admin_order_field = 'value'
