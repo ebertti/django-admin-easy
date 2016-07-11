@@ -1,8 +1,22 @@
+autodetect: true
+max-line-length: 120
+
+requirements:
+  - requirements.txt
+
 uses:
     - django
-autodetect: true
+
 ignore-paths:
     - docs
     - screenshot
     - test_app
     - test_project
+
+pylint:
+    disable:
+    - R0913
+    
+python-targets:
+  - 2
+  - 3
