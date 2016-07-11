@@ -185,7 +185,8 @@ class ImageAdminField(BaseAdminField):
 
 class FilterAdminField(SimpleAdminField):
 
-    def __init__(self, attr, django_filter, load=None, extra=None, short_description=None, admin_order_field=None, allow_tags=False, default=None):
+    def __init__(self, attr, django_filter, load=None, extra=None, short_description=None,
+                 admin_order_field=None, allow_tags=False, default=None):
         self.filter = django_filter
         self.load = load
         self.extra = extra
@@ -200,7 +201,8 @@ class FilterAdminField(SimpleAdminField):
 
 class CacheAdminField(SimpleAdminField):
 
-    def __init__(self, attr, django_filter, load=None, extra=None, short_description=None, admin_order_field=None, allow_tags=False, default=None):
+    def __init__(self, attr, django_filter, load=None, extra=None, short_description=None, 
+                 admin_order_field=None, allow_tags=False, default=None):
         self.filter = django_filter
         self.load = load
         self.extra = extra
