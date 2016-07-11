@@ -113,7 +113,7 @@ If you still prefer using a custom method, you can use our decorators, like this
             return '<img scr="%s">' % obj.image
 
         @easy.short(desc='Positive', order='value', bool=True)
-        def is_true(self, obj)
+        def is_true(self, obj):
             return obj.value > 0
 
 Another Decorators
@@ -126,7 +126,7 @@ In all of this extra decorators, you can use `short` or `smart` arguments to com
 .. code-block:: python
 
     @easy.with_tags()
-    def some_field_with_html(self, obj)
+    def some_field_with_html(self, obj):
         return '<b>{}</b>'.format(obj.value)
     # output some as: mark_safe("<b>something</b>")
 
@@ -142,7 +142,7 @@ If you, for some reason, need to cache a custom field on admin
 .. code-block:: python
 
     @easy.cache(10)# in secondd, default is 60
-    def some_field_with_html(self, obj)
+    def some_field_with_html(self, obj):
         return obj.related.some_hard_word()
 
 If you change something on your model, or some related object, you can clean this cache using this easy way:
@@ -170,19 +170,19 @@ Can be used with all template filters on your project.
 
     # builtin template filter like {{ value|title }}
     @easy.filter('title')
-    def some_field_with_html(self, obj)
+    def some_field_with_html(self, obj):
         return 'ezequiel bertti'
     # output: "Ezequiel Bertti"
 
     # like {% load i10n %} and {{ value|localize }}
     @easy.filter('localize', 'l10n')
-    def some_field_with_html(self, obj)
+    def some_field_with_html(self, obj):
         return 10000
     # output: "10.000"
 
     # like {{ value|date:'y-m-d' }}
-    @easy.filter('localize', 'default', 'y-m-d')
-    def some_field_with_html(self, obj)
+    @easy.filter('date', 'default', 'y-m-d')
+    def some_field_with_html(self, obj):
         return datetime(2016, 06, 28)
     # output: "16-06-28"
 
@@ -221,7 +221,7 @@ More Examples
         actions = ('simples_action',)
 
         @easy.action('My Little Simple Magic Action')
-        def simple_action(self, request, queryset)
+        def simple_action(self, request, queryset):
             return queryset.update(magic=True)
 
 
