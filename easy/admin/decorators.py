@@ -84,7 +84,7 @@ def utils(django_utils_function):
     return decorator
 
 
-def filter(django_builtin_filter, load=None, *extra):
+def filter(django_builtin_filter, load=None, *extra):  # noqa
 
     def decorator(func):
         filter_method = helper.get_django_filter(django_builtin_filter, load)
