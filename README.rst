@@ -77,9 +77,9 @@ or you need to compute some information, like a Image or Link, you will need to 
         is_true.admin_order_field = 'value'
         is_true.boolean = True
 
-It takes to much lines! =D
+It takes too much lines! =D
 
-With **django-admin-easy** you can easy create this field with less lines:
+With **django-admin-easy** you can easily create this field with less lines:
 
 .. code-block:: python
 
@@ -351,7 +351,7 @@ This project is still under development. Feedback and suggestions are very welco
 
 Authors
 -------
-The django-admin-easy was original created by Ezequiel Bertti `@ebertti <https://github.com/ebertti>`_ October 2014.
+The django-admin-easy was originaly created by Ezequiel Bertti `@ebertti <https://github.com/ebertti>`_ October 2014.
 
 Changelog
 ---------
