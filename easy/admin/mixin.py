@@ -36,7 +36,7 @@ class MixinEasyViews(object):
         if view:
             return view(request, pk)
 
-        self.message_user(request, 'Easy view %s not founded' % method_name, messages.ERROR)
+        self.message_user(request, 'Easy view %s not found' % method_name, messages.ERROR)
 
         redirect = reverse('admin:%s_%s_change' % self._get_info(), args=(pk,))
 
