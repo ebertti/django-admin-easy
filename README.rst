@@ -33,6 +33,9 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 
 .. image:: https://img.shields.io/coveralls/ebertti/django-admin-easy/master.svg?maxAge=2592000
   :target: https://coveralls.io/r/ebertti/django-admin-easy?branch=master
+  
+.. image:: https://img.shields.io/codeclimate/github/ebertti/django-admin-easy.svg
+  :target: https://codeclimate.com/github/ebertti/django-admin-easy
 
 .. image:: https://landscape.io/github/ebertti/django-admin-easy/master/landscape.png?style=flat
   :target: https://landscape.io/github/ebertti/django-admin-easy/master
