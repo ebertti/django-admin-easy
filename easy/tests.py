@@ -187,6 +187,20 @@ class TestFilterField(test.TestCase):
         self.assertEqual(ret, 'DJANGO ADMIN EASY IS HELPFUL?')
 
 
+class TestFormatField(test.TestCase):
+    def test_format_field(self):
+        question = mommy.make(
+            Question,
+            pub_date=datetime(2016, 11, 22),
+            question_text='Django admin easy is helpful?',
+        )
+
+        custom_field = easy.FormatAdminField('{o.question_text} | {o.pub_date:%Y-%m-%d}', 'column')
+        ret = custom_field(question)
+
+        self.assertEqual(ret, 'Django admin easy is helpful? | 2016-11-22')
+
+
 class TestNothing(test.TestCase):
 
     def test_nothing(self):

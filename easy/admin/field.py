@@ -213,3 +213,13 @@ class CacheAdminField(SimpleAdminField):
         filter_method = helper.get_django_filter(self.filter, self.load)
         args = (self.extra) if self.extra else []
         return filter_method(value, *args)
+
+
+class FormatAdminField(BaseAdminField):
+
+    def __init__(self, format_string, short_description, admin_order_field=None, allow_tags=False):
+        self.format_string = format_string
+        super(FormatAdminField, self).__init__(short_description, admin_order_field, allow_tags)
+
+    def render(self, obj):
+        return self.format_string.format(o=obj)

@@ -10,9 +10,6 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 .. image:: https://img.shields.io/badge/django-1.5%201.6%201.7%201.8%201.9%201.10-brightgreen.svg
   :target: http://pypi.python.org/pypi/django-admin-easy
 
-.. image:: https://img.shields.io/pypi/dm/django-admin-easy.svg?style=flat
-  :target: http://pypi.python.org/pypi/django-admin-easy
-
 .. image:: https://img.shields.io/pypi/v/django-admin-easy.svg?style=flat
   :target: http://pypi.python.org/pypi/django-admin-easy
 
@@ -229,45 +226,48 @@ More Examples
 
 
         # render a value of field, method, property or your model or related model
-        custom1 = easy.SimpleAdminField('model_field')
-        custom1 = easy.SimpleAdminField('method_of_model')
-        custom2 = easy.SimpleAdminField('related.attribute_or_method')
-        custom4 = easy.SimpleAdminField('related_set.count', 'count')
-        custom5 = easy.SimpleAdminField(lambda x: x.method(), 'show', 'order_by')
+        simple1 = easy.SimpleAdminField('model_field')
+        simple2 = easy.SimpleAdminField('method_of_model')
+        simple3 = easy.SimpleAdminField('related.attribute_or_method')
+        simple4 = easy.SimpleAdminField('related_set.count', 'count')
+        simple5 = easy.SimpleAdminField(lambda x: x.method(), 'show', 'order_by')
 
         # render boolean fields
-        custom6 = easy.BooleanAdminField(lambda x: x.value > 10, 'high')
+        bool1 = easy.BooleanAdminField(lambda x: x.value > 10, 'high')
+
+        # render with string format fields
+        format1 = easy.FormatAdminField('{o.model_field} - {o.date_field:Y%-%m}', 'column name')
 
         # render foreignkey with link to change_form in admin
-        custom7 = easy.ForeignKeyAdminField('related')
+        fk1 = easy.ForeignKeyAdminField('related')
 
         # render foreignkey with link to change_form in admin and related_id content as text
-        custom8 = easy.ForeignKeyAdminField('related', 'related_id')
+        fk2 = easy.ForeignKeyAdminField('related', 'related_id')
 
         # render template
-        custom9 = easy.TemplateAdminField('test.html', 'shorty description', 'order_field')
+        template1 = easy.TemplateAdminField('test.html', 'shorty description', 'order_field')
 
         # render to change_list of another model with a filter on query
-        custom10 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text', {'field_name':'field_to_query'})
+        link1 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text', {'field_name':'field_to_query'})
 
         # display image of some model
-        custom11 = easy.ImageAdminField('image', {'image_attrs':'attr_value'})
+        image1 = easy.ImageAdminField('image', {'image_attrs':'attr_value'})
 
         # use django template filter on a field
-        custom20 = easy.FilterAdminField('model_field', 'upper')
-        custom21 = easy.FilterAdminField('date_field', 'date', 'django', 'y-m-d')
-        custom21 = easy.FilterAdminField('float_field', 'localize', 'l18n')
+        filter1 = easy.FilterAdminField('model_field', 'upper')
+        filter2 = easy.FilterAdminField('date_field', 'date', 'django', 'y-m-d')
+        filter3 = easy.FilterAdminField('float_field', 'localize', 'l18n')
 
         @easy.smart(short_description='Field Description 12', admin_order_field='model_field')
         def custom12(self, obj):
             return obj.something_cool()
 
-        @easy.short(desc='Field Description 13', order='model_field', tags=True)
-        def custom13(self, obj):
+        @easy.short(desc='Field Description 1', order='model_field', tags=True)
+        def decorator1(self, obj):
             return '<b>' + obj.model_field + '</b>'
 
-        @easy.short(desc='Field Description 14', order='model_field', bool=True)
-        def custom14(self, obj):
+        @easy.short(desc='Field Description 2', order='model_field', bool=True)
+        def decorator2(self, obj):
             return obj.model_field > 10
 
 
@@ -284,6 +284,22 @@ don't forget to add your custom field on ``readonly_fields`` attribute of your a
         readonly_fields = ('custom1', 'custom2', 'custom3' ... 'customN')
 
         custom1 = easy.ForeignKeyAdminField('related')
+        # ...
+
+Another way to use is directly on ``list_fields`` declaration:
+
+.. code-block:: python
+
+    from django.contrib import admin
+    import easy
+
+    class YourAdmin(admin.ModelAdmin):
+        list_fields = (
+            easy.TemplateAdminField('test.html', 'shorty description', 'order_field'),
+            easy.ImageAdminField('image', {'image_attrs':'attr_value'}),
+            # ...
+        )
+
         # ...
 
 Mixin
@@ -358,6 +374,10 @@ The django-admin-easy was originaly created by Ezequiel Bertti `@ebertti <https:
 
 Changelog
 ---------
+
+* 0.3.1
+
+  * Add FormatAdminField
 
 * 0.3
 

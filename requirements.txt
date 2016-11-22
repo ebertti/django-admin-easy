@@ -2,3 +2,4 @@ django
 model-mommy
 sphinx
 Pillow
+tox
