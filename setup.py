@@ -8,7 +8,7 @@ setup(
     author='Ezequiel Bertti',
     author_email='ebertti@gmail.com',
     install_requires=['django'],
-    packages=['easy'],
+    packages=find_packages(exclude=('test_app', 'test_project')),
     include_package_data=True,
     license='MIT License',
     platforms=['OS Independent'],
