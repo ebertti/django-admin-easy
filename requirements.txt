@@ -1,4 +1,4 @@
-django
+django==1.10.4
 model-mommy
 sphinx==1.5.1
 Pillow==3.4.2
