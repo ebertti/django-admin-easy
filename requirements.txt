@@ -1,5 +1,5 @@
 django
 model-mommy
 sphinx
-Pillow
+Pillow==3.4.2
 tox
