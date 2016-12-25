@@ -88,11 +88,12 @@ class ForeignKeyAdminField(SimpleAdminField):
 
 class LinkChangeListAdminField(BaseAdminField):
 
-    def __init__(self, app, model, attr, params=None, short_description=None, admin_order_field=None):
+    def __init__(self, app, model, attr, params=None, params_static=None, short_description=None, admin_order_field=None):
         self.app = app
         self.model = model
         self.attr = attr
         self.params = params or {}
+        self.params_static = params_static or {}
         super(LinkChangeListAdminField, self).__init__(short_description or model, admin_order_field, True)
 
     def render(self, obj):
@@ -100,6 +101,8 @@ class LinkChangeListAdminField(BaseAdminField):
         p_params = {}
         for key in self.params.keys():
             p_params[key] = helper.call_or_get(obj, self.params[key])
+
+        p_params.update(self.params_static)
 
         return '<a href="%s">%s</a>' % (
             reverse('admin:%s_%s_changelist' % (self.app, self.model)) + '?' + urlencode(p_params),

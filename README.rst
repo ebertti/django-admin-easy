@@ -42,7 +42,7 @@ Installation
 
 1. Requirements: **Django > 1.5**
 
-2. ``pip install django-admin-easy==0.3``
+2. ``pip install django-admin-easy==0.3.2``
 
 
 How it Works
@@ -248,7 +248,12 @@ More Examples
         template1 = easy.TemplateAdminField('test.html', 'shorty description', 'order_field')
 
         # render to change_list of another model with a filter on query
-        link1 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text', {'field_name':'field_to_query'})
+        link1 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text',
+                                              {'field_name':'dynamic_value_model'})
+
+        link2 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text',
+                                              {'field_name':'dynamic_value_model'},
+                                              {'another_field': 'static_value'})
 
         # display image of some model
         image1 = easy.ImageAdminField('image', {'image_attrs':'attr_value'})
@@ -374,6 +379,9 @@ The django-admin-easy was originaly created by Ezequiel Bertti `@ebertti <https:
 
 Changelog
 ---------
+* 0.3.2
+
+  * Add params_static to LinkChangeListAdminField
 
 * 0.3.1
 

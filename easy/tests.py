@@ -147,10 +147,11 @@ class TestLinkChangeListAdminField(test.TestCase):
             Poll,
         )
 
-        custom_field = easy.LinkChangeListAdminField('test_app', 'question', 'question_set.count', {'pool': 'id'})
+        custom_field = easy.LinkChangeListAdminField('test_app', 'question', 'question_set.count',
+                                                     {'pool': 'id'}, {'static': 1})
         ret = custom_field(poll)
 
-        expected = u'<a href="/admin/test_app/question/?pool=1">0</a>'
+        expected = u'<a href="/admin/test_app/question/?pool=1&static=1">0</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
