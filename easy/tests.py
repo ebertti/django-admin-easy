@@ -12,6 +12,7 @@ from django.http.request import HttpRequest
 from django import test
 from django.utils.datetime_safe import datetime, time
 from django.utils.safestring import SafeData
+from django.utils.six.moves.urllib.parse import urlencode
 from model_mommy import mommy
 
 import easy
@@ -151,7 +152,9 @@ class TestLinkChangeListAdminField(test.TestCase):
                                                      {'pool': 'id'}, {'static': 1})
         ret = custom_field(poll)
 
-        expected = u'<a href="/admin/test_app/question/?pool=1&static=1">0</a>'
+        q = urlencode({'pool': poll.id, 'static':1})
+
+        expected = u'<a href="/admin/test_app/question/?' + q +'">0</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
