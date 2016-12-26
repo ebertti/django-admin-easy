@@ -152,7 +152,7 @@ class TestLinkChangeListAdminField(test.TestCase):
                                                      {'pool': 'id'}, {'static': 1})
         ret = custom_field(poll)
 
-        q = urlencode({'pool': poll.id, 'static':1})
+        q = urlencode({'pool': poll.id, 'static': 1})
 
         expected = u'<a href="/admin/test_app/question/?' + q +'">0</a>'
 
