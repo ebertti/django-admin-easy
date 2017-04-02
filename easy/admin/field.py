@@ -82,7 +82,7 @@ class ForeignKeyAdminField(SimpleAdminField):
                     admin_urlname(ref._meta, 'change'),
                     args=(ref.pk,)
                 ),
-                conditional_escape(display)
+                conditional_escape(display or ref)
             )
 
         return self.default
