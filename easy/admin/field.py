@@ -7,6 +7,7 @@ from django.contrib.admin.templatetags.admin_urls import admin_urlname
 from django.core.urlresolvers import reverse
 from django.db.models import Model, ImageField as ModelImageField
 from django.conf import settings
+from django.utils.html import conditional_escape
 from django.template.loader import render_to_string
 
 try:
@@ -74,13 +75,14 @@ class ForeignKeyAdminField(SimpleAdminField):
         if self.display:
             display = helper.call_or_get(obj, self.display, self.default)
 
+        display = display or ref
         if isinstance(ref, Model):
             return '<a href="%s">%s</a>' % (
                 reverse(
                     admin_urlname(ref._meta, 'change'),
                     args=(ref.pk,)
                 ),
-                display or ref
+                conditional_escape(display)
             )
 
         return self.default
@@ -106,7 +108,7 @@ class LinkChangeListAdminField(BaseAdminField):
 
         return '<a href="%s">%s</a>' % (
             reverse('admin:%s_%s_changelist' % (self.app, self.model)) + '?' + urlencode(p_params),
-            text
+            conditional_escape(text)
         )
 
 
@@ -114,7 +116,7 @@ class ExternalLinkAdminField(BaseAdminField):
     # todo : test with this one
 
     def __init__(self, attr, text, link, args, short_description, **kwargs):
-        self.text = text
+        self.text = conditional_escape(text)
         self.attr = attr
         self.link = link
         if args:
