@@ -42,7 +42,7 @@ Installation
 
 1. Requirements: **Django > 1.5**
 
-2. ``pip install django-admin-easy==0.3.2``
+2. ``pip install django-admin-easy==0.4``
 
 
 How it Works
