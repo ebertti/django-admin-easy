@@ -346,6 +346,34 @@ Or one HTML template
     #<!-- or to do something with a model -->
     {% url 'admin:myapp_mymodel_easy' 'jump' %}
 
+Utilities
+---------
+
+* Response for admin actions
+
+  Return for the change list and show some message for the user keeping or not the filters.
+
+.. code-block:: python
+
+    from django.contrib import admin
+    from django.contrib import messages
+    import easy
+
+    class YourAdmin(admin.ModelAdmin):
+        # ...
+        actions = ('simples_action',)
+
+        def simples_action(self, request, queryset):
+
+            success = queryset.do_something()
+            if success:
+                return easy.action_response(request, 'Some success message for user', keep_querystring=False)
+            else:
+                return easy.action_response(request, 'Some error for user', messages.ERROR)
+
+            # or just redirect to changelist with filters
+            return easy.action_response()
+
 So easy, no?
 
 Screenshot
