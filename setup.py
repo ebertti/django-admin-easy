@@ -3,11 +3,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-admin-easy',
-    version='0.3.2',
+    version='0.4',
     url='http://github.com/ebertti/django-admin-easy/',
     author='Ezequiel Bertti',
     author_email='ebertti@gmail.com',
-    install_requires=['django'],
+    install_requires=['django',],
     packages=find_packages(exclude=('test_app', 'test_project')),
     include_package_data=True,
     license='MIT License',

@@ -379,6 +379,10 @@ The django-admin-easy was originaly created by Ezequiel Bertti `@ebertti <https:
 
 Changelog
 ---------
+* 0.4
+
+  * Create module utils with
+
 * 0.3.2
 
   * Add params_static to LinkChangeListAdminField

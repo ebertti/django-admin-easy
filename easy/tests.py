@@ -8,7 +8,7 @@ import uuid
 import django
 from django.contrib.admin import AdminSite
 from django.contrib.sessions.backends.db import SessionStore
-from django.http.request import HttpRequest
+from django.http.request import HttpRequest, QueryDict
 from django import test
 from django.utils.datetime_safe import datetime, time
 from django.utils.safestring import SafeData
@@ -427,3 +427,74 @@ class TestEasyView(test.TestCase):
         self.assertEqual(response2.status_code, 302)
         self.assertEqual(len(request._messages._queued_messages), 2)
 
+
+class TestUtilActionRedirect(test.TestCase):
+
+    def test_response_normal(self):
+        from django.contrib.messages.storage import default_storage
+
+        request = HttpRequest()
+        request.GET = QueryDict('test=asd')
+        request.session = SessionStore('asd')
+        request._messages = default_storage(request)
+
+        response = easy.action_response(request, 'Some message')
+
+        self.assertEqual(len(request._messages._queued_messages), 1)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], './?test=asd')
+
+    def test_response_without_querystring(self):
+        from django.contrib.messages.storage import default_storage
+
+        request = HttpRequest()
+        request.GET = QueryDict('test=asd')
+        request.session = SessionStore('asd')
+        request._messages = default_storage(request)
+
+        response = easy.action_response(request, 'Some message', keep_querystring=False)
+
+        self.assertEqual(len(request._messages._queued_messages), 1)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], '.')
+
+    def test_response_whitout_message(self):
+        from django.contrib.messages.storage import default_storage
+
+        request = HttpRequest()
+        request.GET = QueryDict('test=asd')
+        request.session = SessionStore('asd')
+        request._messages = default_storage(request)
+
+        response = easy.action_response(request)
+        self.assertEqual(len(request._messages._queued_messages), 0)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], './?test=asd')
+
+    def test_response_whitout_message_and_querystring(self):
+        from django.contrib.messages.storage import default_storage
+
+        request = HttpRequest()
+        request.GET = QueryDict('test=asd')
+        request.session = SessionStore('asd')
+        request._messages = default_storage(request)
+
+        response = easy.action_response(request, keep_querystring=False)
+
+        self.assertEqual(len(request._messages._queued_messages), 0)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], '.')
+
+    def test_response_whitout_GET(self):
+        from django.contrib.messages.storage import default_storage
+
+        request = HttpRequest()
+        request.session = SessionStore('asd')
+        request._messages = default_storage(request)
+
+        response = easy.action_response(request)
+
+        self.assertEqual(len(request._messages._queued_messages), 0)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], '.')
