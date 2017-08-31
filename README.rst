@@ -7,7 +7,7 @@ Collection of admin fields, decorators and mixin to help to create computed or c
   :alt: Join the chat at https://gitter.im/ebertti/django-admin-easy
   :target: https://gitter.im/ebertti/django-admin-easy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-.. image:: https://img.shields.io/badge/django-1.5%201.6%201.7%201.8%201.9%201.10-brightgreen.svg
+.. image:: https://img.shields.io/badge/django-1.5%201.6%201.7%201.8%201.9%201.10%201.11-brightgreen.svg
   :target: http://pypi.python.org/pypi/django-admin-easy
 
 .. image:: https://img.shields.io/pypi/v/django-admin-easy.svg?style=flat
@@ -403,13 +403,14 @@ This project is still under development. Feedback and suggestions are very welco
 
 Authors
 -------
-The django-admin-easy was originaly created by Ezequiel Bertti `@ebertti <https://github.com/ebertti>`_ October 2014.
+The django-admin-easy was originally created by Ezequiel Bertti `@ebertti <https://github.com/ebertti>`_ October 2014.
 
 Changelog
 ---------
 * 0.4
 
-  * Create module utils with
+  * Django 1.11
+  * Create module utils with action_response
 
 * 0.3.2
 
