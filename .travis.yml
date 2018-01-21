@@ -14,9 +14,7 @@ env:
     - DJANGO="Django>1.11,<1.12" # 1.11
     - DJANGO="Django>2.0,<2.1" # 2.0
 
-cache:
-  directories:
-    - $HOME/.cache/pip
+cache: pip
 
 install:
   - pip install "$DJANGO"
