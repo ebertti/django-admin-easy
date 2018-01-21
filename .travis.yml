@@ -8,11 +8,11 @@ python:
 
 env:
   matrix:
-    - DJANGO="Django>1.8,<1.9" # 1.8
-    - DJANGO="Django>1.9,<1.10" # 1.9
-    - DJANGO="Django>1.10,<1.11" # 1.10
-    - DJANGO="Django>1.11,<1.12" # 1.11
-    - DJANGO="Django>2.0,<2.1" # 2.0
+    - DJANGO="Django>=1.8,<1.9" # 1.8
+    - DJANGO="Django>=1.9,<1.10" # 1.9
+    - DJANGO="Django>=1.10,<1.11" # 1.10
+    - DJANGO="Django>=1.11,<1.12" # 1.11
+    - DJANGO="Django>=2.0,<2.1" # 2.0
 
 cache: pip
 
