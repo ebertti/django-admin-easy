@@ -84,8 +84,10 @@ class TestForeignKeyAdminField(test.TestCase):
         ret = custom_field(question)
         if django.VERSION < (1, 9):
             expected = u'<a href="/admin/test_app/poll/1/">Poll object</a>'
-        else :
+        elif django.VERSION < (2, 0):
             expected = u'<a href="/admin/test_app/poll/1/change/">Poll object</a>'
+        else:
+            expected = u'<a href="/admin/test_app/poll/1/change/">Poll object (1)</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
@@ -271,8 +273,6 @@ class TestDjangoUtilsDecorator(test.TestCase):
         @easy.utils('html.escape')
         @easy.utils('html.conditional_escape')
         @easy.utils('html.strip_tags')
-        @easy.utils('safestring.mark_safe')
-        @easy.utils('safestring.mark_for_escaping')
         @easy.utils('text.slugify')
         @easy.utils('translation.gettext')
         @easy.utils('translation.ugettext')
@@ -402,8 +402,10 @@ class TestEasyView(test.TestCase):
         views = self.admin.get_urls()
         if django.VERSION < (1, 9):
             self.assertEqual(len(views), 7)
-        else:
+        elif django.VERSION < (2, 0):
             self.assertEqual(len(views), 8)
+        else:
+            self.assertEqual(len(views), 9)
 
     def test_exist_view(self):
         request = HttpRequest()

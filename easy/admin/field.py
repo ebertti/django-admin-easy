@@ -2,18 +2,15 @@
 from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
-from django.utils.six.moves.urllib.parse import urlencode
+
+
 from django.contrib.admin.templatetags.admin_urls import admin_urlname
-from django.core.urlresolvers import reverse
 from django.db.models import Model, ImageField as ModelImageField
 from django.conf import settings
 from django.utils.html import conditional_escape
 from django.template.loader import render_to_string
 
-try:
-    from django.forms.utils import flatatt
-except ImportError:
-    from django.forms.util import flatatt
+from easy.six import reverse, urlencode, flatatt
 
 from easy import helper
 
