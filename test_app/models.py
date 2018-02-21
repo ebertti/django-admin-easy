@@ -6,6 +6,13 @@ class Poll(models.Model):
     name = models.CharField(max_length=200)
 
 
+class PollGroup(models.Model):
+    """Add this model to test the ManyToManyAdminField."""
+
+    name = models.CharField(max_length=200)
+    polls = models.ManyToManyField(Poll, related_name='poll_groups')
+
+
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
