@@ -88,6 +88,39 @@ class ForeignKeyAdminField(SimpleAdminField):
         return self.default
 
 
+class ManyToManyAdminField(SimpleAdminField):
+    """Renders a ManyToManyField as links."""
+
+    def __init__(self, attr, display=None, short_description=None, admin_order_field=None, default=None):
+        self.display = display
+        super(ManyToManyAdminField, self).__init__(attr, short_description, admin_order_field, True, default)
+
+    def __name__(self):
+        return 'ManyToManyAdminField'
+
+    def render(self, obj):
+        ref = getattr(obj, self.attr, None)
+        display = None
+        if self.display:
+            display = helper.call_or_get(obj, self.display, self.default)
+
+        list_str = display
+        if hasattr(ref, 'get_queryset'):
+            list_str = '<ul>'
+            objects = ref.get_queryset()
+            for obj in objects:
+                list_str += '<li><a href="%s">%s</a><li>' % (
+                    reverse(
+                        admin_urlname(obj._meta, 'change'),
+                        args=(obj.pk,)
+                    ),
+                    conditional_escape(display or obj)
+                )
+            list_str += '</ul>'
+
+        return list_str
+
+
 class LinkChangeListAdminField(BaseAdminField):
 
     def __init__(self, app, model, attr, params=None, params_static=None, short_description=None, admin_order_field=None):
@@ -206,7 +239,7 @@ class FilterAdminField(SimpleAdminField):
 
 class CacheAdminField(SimpleAdminField):
 
-    def __init__(self, attr, django_filter, load=None, extra=None, short_description=None, 
+    def __init__(self, attr, django_filter, load=None, extra=None, short_description=None,
                  admin_order_field=None, allow_tags=False, default=None):
         self.filter = django_filter
         self.load = load
