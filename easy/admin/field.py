@@ -46,6 +46,9 @@ class SimpleAdminField(BaseAdminField):
 
         super(SimpleAdminField, self).__init__(short_description, admin_order_field, allow_tags)
 
+    def __name__(self):
+        return 'SimpleAdminField'
+
     def render(self, obj):
         return helper.call_or_get(obj, self.attr, self.default)
 
