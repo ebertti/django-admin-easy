@@ -4,7 +4,7 @@ from __future__ import (
 )
 from .admin import *  # noqa
 from .admin.field import (  # noqa
-    BaseAdminField, BooleanAdminField, ExternalLinkAdminField, ForeignKeyAdminField, ImageAdminField,
+    BaseAdminField, BooleanAdminField, ExternalLinkAdminField, ForeignKeyAdminField, ManyToManyAdminField, ImageAdminField,
     LinkChangeListAdminField, SimpleAdminField, TemplateAdminField, ModelImageField, FilterAdminField,
     CacheAdminField, FormatAdminField
 )
