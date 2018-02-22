@@ -135,8 +135,8 @@ class TestManyToManyAdminField(test.TestCase):
 
         poll_one = mommy.make(Poll, name='Test Poll #1')
         poll_two = mommy.make(Poll, name='Test Poll #2')
-        poll_group.add(poll_one)
-        poll_group.add(poll_two)
+        poll_group.polls.add(poll_one)
+        poll_group.polls.add(poll_two)
 
         custom_field = easy.ManyToManyAdminField('polls')
         ret = custom_field(poll_group)
@@ -161,8 +161,8 @@ class TestManyToManyAdminField(test.TestCase):
 
         poll_one = mommy.make(Poll, name='Test Poll #1')
         poll_two = mommy.make(Poll, name='Test Poll #2')
-        poll_group.add(poll_one)
-        poll_group.add(poll_two)
+        poll_group.polls.add(poll_one)
+        poll_group.polls.add(poll_two)
 
         custom_field = easy.ManyToManyAdminField('polls', 'name')
         ret = custom_field(poll_group)
