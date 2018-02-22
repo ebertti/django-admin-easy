@@ -109,7 +109,7 @@ class ManyToManyAdminField(SimpleAdminField):
             list_str = '<ul>'
             objects = ref.get_queryset()
             for obj in objects:
-                list_str += '<li><a href="%s">%s</a><li>' % (
+                list_str += '<li><a href="%s">%s</a></li>' % (
                     reverse(
                         admin_urlname(obj._meta, 'change'),
                         args=(obj.pk,)
