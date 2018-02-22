@@ -127,7 +127,7 @@ class TestForeignKeyAdminField(test.TestCase):
 
 
 class TestManyToManyAdminField(test.TestCase):
-    def test_foreignkey(self):
+    def test_manytomany(self):
         poll_group = mommy.make(
             PollGroup,
             name='Test Poll Group'
@@ -153,7 +153,7 @@ class TestManyToManyAdminField(test.TestCase):
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
 
-    def test_foreignkey_display(self):
+    def test_manytomany_display(self):
         poll_group = mommy.make(
             PollGroup,
             name='Test Poll Group'
