@@ -142,13 +142,13 @@ class TestManyToManyAdminField(test.TestCase):
         ret = custom_field(poll_group)
         if django.VERSION < (1, 9):
             expected = u'<ul><li><a href="/admin/test_app/poll/%s/">Poll object</a></li>' % (poll_one.id, )
-            expected += u'<li><a href="/admin/test_app/poll/%s/">Poll object</a></li>' % (poll_two.id, )
+            expected += u'<li><a href="/admin/test_app/poll/%s/">Poll object</a></li></ul>' % (poll_two.id, )
         elif django.VERSION < (2, 0):
             expected = u'<ul><li><a href="/admin/test_app/poll/%s/change/">Poll object</a></li>' % (poll_one.id, )
-            expected += u'<li><a href="/admin/test_app/poll/%s/change/">Poll object</a></li>' % (poll_two.id, )
+            expected += u'<li><a href="/admin/test_app/poll/%s/change/">Poll object</a></li></ul>' % (poll_two.id, )
         else:
             expected = u'<ul><li><a href="/admin/test_app/poll/%s/change/">Poll object (1)</a></li>' % (poll_one.id, )
-            expected += u'<li><a href="/admin/test_app/poll/%s/change/">Poll object (1)</a></li>' % (poll_two.id, )
+            expected += u'<li><a href="/admin/test_app/poll/%s/change/">Poll object (1)</a></li></ul>' % (poll_two.id, )
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
