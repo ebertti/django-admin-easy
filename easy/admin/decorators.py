@@ -1,7 +1,3 @@
-# coding: utf-8
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
 from functools import wraps
 from django import utils as django_utils
 from django.core.cache import cache as django_cache
@@ -56,6 +52,12 @@ def short(**kwargs):
                 setattr(func, FUNCTION_MAP[key], value)
             else:
                 setattr(func, key, value)
+
+        if getattr(func, 'allow_tags', False):
+            @wraps(func)
+            def wrapper(*args, **kwargs):
+                return mark_safe(func(*args, **kwargs))
+            return wrapper
         return func
 
     return decorator

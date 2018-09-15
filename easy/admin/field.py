@@ -1,14 +1,9 @@
-# coding: utf-8
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
-
 from django.contrib.admin.templatetags.admin_urls import admin_urlname
 from django.db.models import Model, ImageField as ModelImageField
 from django.conf import settings
 from django.utils.html import conditional_escape
 from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 
 from easy.six import reverse, urlencode, flatatt
 
@@ -28,6 +23,8 @@ class BaseAdminField(object):
         raise NotImplementedError()
 
     def __call__(self, obj):
+        if getattr(self, 'allow_tags', False):
+            return mark_safe(self.render(obj))
         return self.render(obj)
 
 

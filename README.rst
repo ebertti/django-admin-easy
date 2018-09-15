@@ -7,7 +7,7 @@ Collection of admin fields, decorators and mixin to help to create computed or c
   :alt: Join the chat at https://gitter.im/ebertti/django-admin-easy
   :target: https://gitter.im/ebertti/django-admin-easy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-.. image:: https://img.shields.io/badge/django-1.5%201.6%201.7%201.8%201.9%201.10%201.11%202.0-brightgreen.svg
+.. image:: https://img.shields.io/badge/django-1.8%201.9%201.10%201.11%202.0%202.1-brightgreen.svg
   :target: http://pypi.python.org/pypi/django-admin-easy
 
 .. image:: https://img.shields.io/pypi/v/django-admin-easy.svg?style=flat
@@ -40,9 +40,14 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 Installation
 ------------
 
-1. Requirements: **Django > 1.5**
+1. Requirements: **Django > 1.8** and **Python > 3.4**
 
-2. ``pip install django-admin-easy==0.4.1``
+2. ``pip install django-admin-easy==0.5``
+
+
+* For **Django < 1.8** or **Python 2.x**
+
+  ``pip install django-admin-easy==0.4.1``
 
 
 How it Works

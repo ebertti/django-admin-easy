@@ -1,18 +1,13 @@
-# coding: utf-8
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
 import uuid
-
 import django
+
 from django.contrib.admin import AdminSite
 from django.contrib.sessions.backends.db import SessionStore
 from django.http.request import HttpRequest, QueryDict
 from django import test
 from django.utils.datetime_safe import datetime, time
 from django.utils.safestring import SafeData
-from django.utils.six.moves.urllib.parse import urlencode
+from easy.six import urlencode
 from model_mommy import mommy
 
 import easy
@@ -244,7 +239,7 @@ class TestShortDecorator(test.TestCase):
         self.assertEqual(field.allow_tags, True)
         self.assertEqual(field.boolean, True)
         self.assertEqual(field.empty_value_display, '-')
-        self.assertEqual(field(object(), 1), 1)
+        self.assertEqual(field(object(), 1), '1')
 
     def test_with_no_default_keys(self):
         @easy.short(asd='test', ds='test_field')
