@@ -42,7 +42,7 @@ Installation
 
 1. Requirements: **Django > 1.8** and **Python > 3.4**
 
-2. ``pip install django-admin-easy==0.5``
+2. ``pip install django-admin-easy==0.5.1``
 
 
 * For **Django < 1.8** or **Python 2.x**
@@ -229,6 +229,11 @@ More Examples
         def simple_action(self, request, queryset):
             return queryset.update(magic=True)
 
+        # actoin only for user that has change permission on this model
+        @easy.action('Another Simple Magic Action', 'change')
+        def simple_action(self, request, queryset):
+            return queryset.update(magic=True)
+
 
         # render a value of field, method, property or your model or related model
         simple1 = easy.SimpleAdminField('model_field')
@@ -412,6 +417,10 @@ The django-admin-easy was originally created by Ezequiel Bertti `@ebertti <https
 
 Changelog
 ---------
+* 0.5.1
+
+   * Add permission on action decorator
+
 * 0.4.1
 
   * Django 2.0

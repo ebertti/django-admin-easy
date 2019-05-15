@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from functools import wraps
 from django import utils as django_utils
 from django.core.cache import cache as django_cache
@@ -63,9 +64,14 @@ def short(**kwargs):
     return decorator
 
 
-def action(short_description):
+def action(short_description, permission=None):
     def decorator(func):
         func.short_description = short_description
+        if permission:
+            if isinstance(permission, str):
+                func.allowed_permissions = (permission,)
+            else:
+                func.allowed_permissions = permission
         return func
 
     return decorator

@@ -385,6 +385,25 @@ class TestActionDecorator(test.TestCase):
         self.assertEqual(field(self, 1), 1)
         self.assertEqual(field.short_description, 'description')
 
+    def test_decorator_permission(self):
+        @easy.action('description', 'change')
+        def field(self, obj):
+            return obj
+
+        self.assertEqual(field(self, 1), 1)
+        self.assertEqual(field.short_description, 'description')
+        self.assertEqual(field.allowed_permissions, ('change',))
+
+
+    def test_decorator_permission_array(self):
+        @easy.action('description', ['change'])
+        def field(self, obj):
+            return obj
+
+        self.assertEqual(field(self, 1), 1)
+        self.assertEqual(field.short_description, 'description')
+        self.assertEqual(field.allowed_permissions, ['change',])
+
 
 class TestEasyView(test.TestCase):
 

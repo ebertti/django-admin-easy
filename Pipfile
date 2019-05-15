@@ -1,5 +1,4 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
@@ -8,13 +7,11 @@ name = "pypi"
 python_version = "3.6"
 
 [packages]
-
 Django = "*"
 model_mommy = "==1.5.1"
 Sphinx = "==1.7.0b1"
 Pillow = "==5.0.0"
 tox = "==2.9.1"
-
+coverage = "*"
 
 [dev-packages]
-
