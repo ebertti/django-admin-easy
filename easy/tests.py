@@ -13,7 +13,7 @@ from model_mommy import mommy
 import easy
 from easy.helper import Nothing
 from test_app.admin import PollAdmin
-from test_app.models import Question, Poll
+from test_app.models import Question, Poll, PollGroup
 
 
 class TestSimpleAdminField(test.TestCase):
@@ -116,6 +116,57 @@ class TestForeignKeyAdminField(test.TestCase):
             expected = u'<a href="/admin/test_app/poll/1/">1</a>'
         else:
             expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
+
+        self.assertEqual(expected, ret)
+        self.assertTrue(custom_field.allow_tags)
+
+
+class TestManyToManyAdminField(test.TestCase):
+    def test_manytomany(self):
+        poll_group = mommy.make(
+            PollGroup,
+            name='Test Poll Group'
+        )
+
+        poll_one = mommy.make(Poll, name='Test Poll #1')
+        poll_two = mommy.make(Poll, name='Test Poll #2')
+        poll_group.polls.add(poll_one)
+        poll_group.polls.add(poll_two)
+
+        custom_field = easy.ManyToManyAdminField('polls')
+        ret = custom_field(poll_group)
+        if django.VERSION < (1, 9):
+            expected = u'<ul><li><a href="/admin/test_app/poll/%s/">Poll object</a></li>' % (poll_one.id, )
+            expected += u'<li><a href="/admin/test_app/poll/%s/">Poll object</a></li></ul>' % (poll_two.id, )
+        elif django.VERSION < (2, 0):
+            expected = u'<ul><li><a href="/admin/test_app/poll/%s/change/">Poll object</a></li>' % (poll_one.id, )
+            expected += u'<li><a href="/admin/test_app/poll/%s/change/">Poll object</a></li></ul>' % (poll_two.id, )
+        else:
+            expected = u'<ul><li><a href="/admin/test_app/poll/%s/change/">Poll object (1)</a></li>' % (poll_one.id, )
+            expected += u'<li><a href="/admin/test_app/poll/%s/change/">Poll object (1)</a></li></ul>' % (poll_two.id, )
+
+        self.assertEqual(expected, ret)
+        self.assertTrue(custom_field.allow_tags)
+
+    def test_manytomany_display(self):
+        poll_group = mommy.make(
+            PollGroup,
+            name='Test Poll Group'
+        )
+
+        poll_one = mommy.make(Poll, name='Test Poll #1')
+        poll_two = mommy.make(Poll, name='Test Poll #2')
+        poll_group.polls.add(poll_one)
+        poll_group.polls.add(poll_two)
+
+        custom_field = easy.ManyToManyAdminField('polls', 'name')
+        ret = custom_field(poll_group)
+        if django.VERSION < (1, 9):
+            expected = u'<ul><li><a href="/admin/test_app/poll/%s/">%s</a></li>' % (poll_one.id, poll_group.name, )
+            expected += u'<li><a href="/admin/test_app/poll/%s/">%s</a></li></ul>' % (poll_two.id, poll_group.name, )
+        else:
+            expected = u'<ul><li><a href="/admin/test_app/poll/%s/change/">%s</a></li>' % (poll_one.id, poll_group.name, )
+            expected += u'<li><a href="/admin/test_app/poll/%s/change/">%s</a></li></ul>' % (poll_two.id, poll_group.name, )
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
