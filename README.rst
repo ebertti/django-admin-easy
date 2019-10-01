@@ -7,7 +7,7 @@ Collection of admin fields, decorators and mixin to help to create computed or c
   :alt: Join the chat at https://gitter.im/ebertti/django-admin-easy
   :target: https://gitter.im/ebertti/django-admin-easy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-.. image:: https://img.shields.io/badge/django-1.8%201.9%201.10%201.11%202.0%202.1-brightgreen.svg
+.. image:: https://img.shields.io/badge/django-1.8%201.9%201.10%201.11%202.0%202.1%202.2%203.0-brightgreen.svg
   :target: http://pypi.python.org/pypi/django-admin-easy
 
 .. image:: https://img.shields.io/pypi/v/django-admin-easy.svg?style=flat
@@ -30,17 +30,12 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 
 .. image:: https://img.shields.io/coveralls/ebertti/django-admin-easy/master.svg?maxAge=2592000
   :target: https://coveralls.io/r/ebertti/django-admin-easy?branch=master
-  
-.. image:: https://img.shields.io/codeclimate/github/ebertti/django-admin-easy.svg
-  :target: https://codeclimate.com/github/ebertti/django-admin-easy
 
-.. image:: https://landscape.io/github/ebertti/django-admin-easy/master/landscape.png?style=flat
-  :target: https://landscape.io/github/ebertti/django-admin-easy/master
 
 Installation
 ------------
 
-1. Requirements: **Django > 1.8** and **Python > 3.4**
+1. Requirements: **Django > 1.8** and **Python > 3.5**
 
 2. ``pip install django-admin-easy==0.5.1``
 
