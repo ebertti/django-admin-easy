@@ -56,7 +56,7 @@ class TestSimpleAdminField(test.TestCase):
 
 class TestBooleanAdminField(test.TestCase):
     def test_boolean(self):
-        question = mommy.make(
+        question = baker.make(
             Question,
             question_text='Eba!'
         )
