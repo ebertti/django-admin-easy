@@ -8,7 +8,7 @@ from django import test
 from django.utils.datetime_safe import datetime, time
 from django.utils.safestring import SafeData
 from easy.six import urlencode
-from model_mommy import mommy
+from model_bakery import baker
 
 import easy
 from easy.helper import Nothing
@@ -19,7 +19,7 @@ from test_app.models import Question, Poll
 class TestSimpleAdminField(test.TestCase):
 
     def test_simple(self):
-        question = mommy.make(
+        question = baker.make(
             Question
         )
 
@@ -31,7 +31,7 @@ class TestSimpleAdminField(test.TestCase):
         self.assertEqual(custom_field.short_description, 'poll')
 
     def test_simple_lambda(self):
-        question = mommy.make(
+        question = baker.make(
             Question
         )
 
@@ -43,7 +43,7 @@ class TestSimpleAdminField(test.TestCase):
         self.assertEqual(custom_field.short_description, 'shorty')
 
     def test_simple_default(self):
-        question = mommy.make(
+        question = baker.make(
             Question
         )
 
@@ -70,7 +70,7 @@ class TestBooleanAdminField(test.TestCase):
 
 class TestForeignKeyAdminField(test.TestCase):
     def test_foreignkey(self):
-        question = mommy.make(
+        question = baker.make(
             Question,
             question_text='Eba!'
         )
@@ -88,7 +88,7 @@ class TestForeignKeyAdminField(test.TestCase):
         self.assertTrue(custom_field.allow_tags)
 
     def test_foreignkey_display(self):
-        question = mommy.make(
+        question = baker.make(
             Question,
             question_text='Eba!'
         )
@@ -104,7 +104,7 @@ class TestForeignKeyAdminField(test.TestCase):
         self.assertTrue(custom_field.allow_tags)
 
     def test_foreignkey_display_sub_property(self):
-        question = mommy.make(
+        question = baker.make(
             Question,
             question_text='Eba!'
         )
@@ -123,7 +123,7 @@ class TestForeignKeyAdminField(test.TestCase):
 
 class TestRawIdAdminField(test.TestCase):
     def test_foreignkey(self):
-        question = mommy.make(
+        question = baker.make(
             Question,
             question_text='Eba!'
         )
@@ -144,7 +144,7 @@ class TestRawIdAdminField(test.TestCase):
 class TestTemplateAdminField(test.TestCase):
 
     def test_template(self):
-        question = mommy.make(
+        question = baker.make(
             Question,
             question_text='Eba!'
         )
@@ -161,7 +161,7 @@ class TestTemplateAdminField(test.TestCase):
 class TestLinkChangeListAdminField(test.TestCase):
 
     def test_link(self):
-        poll = mommy.make(
+        poll = baker.make(
             Poll,
         )
 
@@ -180,7 +180,7 @@ class TestLinkChangeListAdminField(test.TestCase):
 class TestImageField(test.TestCase):
 
     def test_image_field(self):
-        question = mommy.make(
+        question = baker.make(
             Question,
             image='asd.jpg',
             question_text='bla'
@@ -197,7 +197,7 @@ class TestImageField(test.TestCase):
 class TestFilterField(test.TestCase):
 
     def test_image_field(self):
-        question = mommy.make(
+        question = baker.make(
             Question,
             question_text='Django admin easy is helpful?'
         )
@@ -210,7 +210,7 @@ class TestFilterField(test.TestCase):
 
 class TestFormatField(test.TestCase):
     def test_format_field(self):
-        question = mommy.make(
+        question = baker.make(
             Question,
             pub_date=datetime(2016, 11, 22),
             question_text='Django admin easy is helpful?',
@@ -356,7 +356,7 @@ class TestCacheDecorator(test.TestCase):
         return uuid.uuid1()
 
     def setUp(self):
-        self.pool = mommy.make(
+        self.pool = baker.make(
             Poll,
         )
 
