@@ -1,5 +1,7 @@
+from _weakref import ref
+
 from django.contrib.admin.templatetags.admin_urls import admin_urlname
-from django.db.models import Model, ImageField as ModelImageField
+from django.db.models import Model, ImageField as ModelImageField, ForeignKey
 from django.conf import settings
 from django.utils.html import conditional_escape
 from django.template.loader import render_to_string
@@ -77,6 +79,28 @@ class ForeignKeyAdminField(SimpleAdminField):
                     args=(ref.pk,)
                 ),
                 conditional_escape(display or ref)
+            )
+
+        return self.default
+
+
+class RawIdAdminField(SimpleAdminField):
+
+    def __init__(self, attr, short_description=None, admin_order_field=None, default=None):
+        super(RawIdAdminField, self).__init__(attr, short_description, admin_order_field, True, default)
+
+    def render(self, obj):
+        field = obj._meta.get_field(self.attr)
+
+        if isinstance(field, ForeignKey):
+            meta = field.related_model._meta
+            id = getattr(obj, field.attname)
+            return '<a href="%s">%s</a>' % (
+                reverse(
+                    admin_urlname(meta, 'change'),
+                    args=(id,)
+                ),
+                conditional_escape(id)
             )
 
         return self.default

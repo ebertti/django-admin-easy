@@ -121,6 +121,26 @@ class TestForeignKeyAdminField(test.TestCase):
         self.assertTrue(custom_field.allow_tags)
 
 
+class TestRawIdAdminField(test.TestCase):
+    def test_foreignkey(self):
+        question = mommy.make(
+            Question,
+            question_text='Eba!'
+        )
+
+        custom_field = easy.RawIdAdminField('poll')
+        ret = custom_field(question)
+        if django.VERSION < (1, 9):
+            expected = u'<a href="/admin/test_app/poll/1/">1</a>'
+        elif django.VERSION < (2, 0):
+            expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
+        else:
+            expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
+
+        self.assertEqual(expected, ret)
+        self.assertTrue(custom_field.allow_tags)
+
+
 class TestTemplateAdminField(test.TestCase):
 
     def test_template(self):

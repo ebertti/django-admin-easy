@@ -37,7 +37,7 @@ Installation
 
 1. Requirements: **Django > 1.8** and **Python > 3.5**
 
-2. ``pip install django-admin-easy==0.5.1``
+2. ``pip install django-admin-easy==0.6``
 
 
 * For **Django < 1.8** or **Python 2.x**
@@ -249,6 +249,10 @@ More Examples
         # render foreignkey with link to change_form in admin and related_id content as text
         fk2 = easy.ForeignKeyAdminField('related', 'related_id')
 
+        # render foreignkey_id, like raw_id_fields, with link to change_form in admin and related_id content as text
+        # without extra queries or select_related to prevent extra n-1 queries
+        raw1 = easy.RawIdAdminField('related')
+
         # render template
         template1 = easy.TemplateAdminField('test.html', 'shorty description', 'order_field')
 
@@ -412,6 +416,10 @@ The django-admin-easy was originally created by Ezequiel Bertti `@ebertti <https
 
 Changelog
 ---------
+* 0.6
+
+   * Add RawIdAdminField
+
 * 0.5.1
 
    * Add permission on action decorator
