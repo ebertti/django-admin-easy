@@ -20,8 +20,6 @@ cache: pip
 
 install:
   - pip install "$DJANGO" pipenv
-  - pipenv lock -r > pre.txt
-  - sed '/django==/d' pre.txt > requirements.txt
   - pip install -r requirements.txt
   - pip install coveralls
 

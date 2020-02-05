@@ -1,0 +1,5 @@
+model-bakery
+Sphinx
+Pillow
+tox
+coverage
