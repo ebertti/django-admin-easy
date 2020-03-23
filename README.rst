@@ -24,7 +24,7 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 
 .. image:: https://img.shields.io/travis/ebertti/django-admin-easy/master.svg?maxAge=2592000
   :target: https://travis-ci.org/ebertti/django-admin-easy
-  
+
 .. image:: https://img.shields.io/requires/github/ebertti/django-admin-easy.svg?maxAge=2592000
   :target: https://requires.io/github/ebertti/django-admin-easy/requirements/
 
@@ -319,14 +319,14 @@ Another way to use is directly on ``list_fields`` declaration:
 Mixin
 -----
 
-To help you to create a custom view on django admin, we create de MixinEasyView for your Admin Classes
+To help you to create a custom view on django admin, we create the MixinEasyViews for your Admin Classes
 
 .. code-block:: python
 
     from django.contrib import admin
     import easy
 
-    class MyModelAdmin(easy.MixinEasyView, admin.ModelAdmin):
+    class MyModelAdmin(easy.MixinEasyViews, admin.ModelAdmin):
         # ...
 
         def easy_view_jump(self, request, pk=None):
@@ -404,7 +404,7 @@ This project is still under development. Feedback and suggestions are very welco
 .. image:: https://img.shields.io/waffle/label/ebertti/django-admin-easy/in%20progress.svg?maxAge=2592000
    :target: https://waffle.io/ebertti/django-admin-easy
 
-.. image:: https://img.shields.io/github/forks/ebertti/django-admin-easy.svg 
+.. image:: https://img.shields.io/github/forks/ebertti/django-admin-easy.svg
    :target: https://github.com/ebertti/django-admin-easy/network
 
 .. image:: https://img.shields.io/github/stars/ebertti/django-admin-easy.svg
@@ -450,7 +450,7 @@ Changelog
 
 * 0.2.2
 
-  * Add MixinEasyView
+  * Add MixinEasyViews
 
 * 0.2.1
 
