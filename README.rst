@@ -1,7 +1,7 @@
 django-admin-easy
 =================
 
-Collection of admin fields, decorators and mixin to help to create computed or custom fields more friendly and easy way
+Collection of admin fields, decorators and mixin to help to create computed or custom fields more friendly and easy way.
 
 .. image:: https://badges.gitter.im/Join%20Chat.svg
   :alt: Join the chat at https://gitter.im/ebertti/django-admin-easy
@@ -141,7 +141,7 @@ If you, for some reason, need to cache a custom field on admin
 
 .. code-block:: python
 
-    @easy.cache(10)# in secondd, default is 60
+    @easy.cache(10)# in seconds, default is 60
     def some_field_with_html(self, obj):
         return obj.related.some_hard_word()
 
