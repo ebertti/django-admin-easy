@@ -32,3 +32,4 @@ pip-log.txt
 #sqlite3
 *.db
 *.sqlite3
+.venv
