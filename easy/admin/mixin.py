@@ -1,9 +1,8 @@
-from django.conf.urls import url
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 
 from easy.helper import get_model_name
-from easy.six import reverse
+from easy.six import reverse, url
 
 
 class MixinEasyViews(object):

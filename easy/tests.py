@@ -285,16 +285,26 @@ class TestDjangoUtilsDecorator(test.TestCase):
 
     def test_decorators(self):
 
-        @easy.utils('html.escape')
-        @easy.utils('html.conditional_escape')
-        @easy.utils('html.strip_tags')
-        @easy.utils('text.slugify')
-        @easy.utils('translation.gettext')
-        @easy.utils('translation.ugettext')
-        @easy.utils('translation.gettext_noop')
-        @easy.utils('translation.ugettext_noop')
-        def field(self, obj):
-            return obj
+        if django.VERSION < (4, 0):
+            @easy.utils('html.escape')
+            @easy.utils('html.conditional_escape')
+            @easy.utils('html.strip_tags')
+            @easy.utils('text.slugify')
+            @easy.utils('translation.gettext')
+            @easy.utils('translation.ugettext')
+            @easy.utils('translation.gettext_noop')
+            @easy.utils('translation.ugettext_noop')
+            def field(self, obj):
+                return obj
+        else:
+            @easy.utils('html.escape')
+            @easy.utils('html.conditional_escape')
+            @easy.utils('html.strip_tags')
+            @easy.utils('text.slugify')
+            @easy.utils('translation.gettext')
+            @easy.utils('translation.gettext_noop')
+            def field(self, obj):
+                return obj
 
         self.assertEquals(field(object(), 'asd'), 'asd')
 
