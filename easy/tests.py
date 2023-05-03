@@ -290,9 +290,7 @@ class TestDjangoUtilsDecorator(test.TestCase):
         @easy.utils('html.strip_tags')
         @easy.utils('text.slugify')
         @easy.utils('translation.gettext')
-        @easy.utils('translation.ugettext')
         @easy.utils('translation.gettext_noop')
-        @easy.utils('translation.ugettext_noop')
         def field(self, obj):
             return obj
 

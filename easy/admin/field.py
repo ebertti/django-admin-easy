@@ -1,5 +1,3 @@
-from _weakref import ref
-
 from django.contrib.admin.templatetags.admin_urls import admin_urlname
 from django.db.models import Model, ImageField as ModelImageField, ForeignKey
 from django.conf import settings

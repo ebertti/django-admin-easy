@@ -18,5 +18,4 @@ pylint:
     - R0913
     
 python-targets:
-  - 2
   - 3
