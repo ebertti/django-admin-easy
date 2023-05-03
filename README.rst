@@ -4,7 +4,16 @@ django-admin-easy
 Collection of admin fields, decorators and mixin to help to create computed or custom fields more friendly and easy way
 
 
-.. image:: https://img.shields.io/badge/django-1.8%201.9%201.10%201.11%202.0%202.1%202.2%203.0%203.1%203.2-brightgreen.svg
+.. image:: https://img.shields.io/badge/django-1.8%201.9%201.10%201.11-brightgreen.svg
+  :target: http://pypi.python.org/pypi/django-admin-easy
+
+.. image:: https://img.shields.io/badge/django-2.0%202.1%202.2-brightgreen.svg
+  :target: http://pypi.python.org/pypi/django-admin-easy
+
+.. image:: https://img.shields.io/badge/django-3.0%203.1%203.2%204.0%204.1%204.2-brightgreen.svg
+  :target: http://pypi.python.org/pypi/django-admin-easy
+
+.. image:: https://img.shields.io/badge/django-4.0%204.1%204.2-brightgreen.svg
   :target: http://pypi.python.org/pypi/django-admin-easy
 
 .. image:: https://img.shields.io/pypi/v/django-admin-easy.svg?style=flat
@@ -22,9 +31,6 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 .. image:: https://img.shields.io/travis/ebertti/django-admin-easy/master.svg?maxAge=2592000
   :target: https://travis-ci.org/ebertti/django-admin-easy
 
-.. image:: https://img.shields.io/requires/github/ebertti/django-admin-easy.svg?maxAge=2592000
-  :target: https://requires.io/github/ebertti/django-admin-easy/requirements/
-
 .. image:: https://img.shields.io/coveralls/ebertti/django-admin-easy/master.svg?maxAge=2592000
   :target: https://coveralls.io/r/ebertti/django-admin-easy?branch=master
 
@@ -34,7 +40,7 @@ Installation
 
 1. Requirements: **Django > 1.8** and **Python > 3.5**
 
-2. ``pip install django-admin-easy==0.6.1``
+2. ``pip install django-admin-easy==0.7.0``
 
 
 * For **Django < 1.8** or **Python 2.x**
