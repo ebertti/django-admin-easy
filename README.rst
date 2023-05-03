@@ -419,46 +419,54 @@ The django-admin-easy was originally created by Ezequiel Bertti `@ebertti <https
 
 Changelog
 ---------
+* 0.7.0
+
+   Add support for Django 4.0, 4.1 and 4.2
+   Add support for Python 3.10 and 3.11
+   Add Github Actions for testing
+   Add job to realease on pypi
+   Thanks @Lex98
+
 * 0.6.1
 
-   * Add Support do Django 3.2 and Python 3.9
+   Add support for Django 3.2 and Python 3.9
 
 * 0.6
 
-   * Add RawIdAdminField
+   Add RawIdAdminField
 
 * 0.5.1
 
-   * Add permission on action decorator
+   Add permission on action decorator
 
 * 0.4.1
 
-  * Django 2.0
+   Django 2.0
 
 * 0.4
 
-  * Django 1.11
-  * Create module utils with action_response
+   Django 1.11
+   Create module utils with action_response
 
 * 0.3.2
 
-  * Add params_static to LinkChangeListAdminField
+   Add params_static to LinkChangeListAdminField
 
 * 0.3.1
 
-  * Add FormatAdminField
+   Add FormatAdminField
 
 * 0.3
 
-  * Add import from `__future__` on all files
-  * Django 1.10
-  * More decorators
-  * More admin fields
+   Add import from `__future__` on all files
+   Django 1.10
+   More decorators
+   More admin fields
 
 * 0.2.2
 
-  * Add MixinEasyViews
+   Add MixinEasyViews
 
 * 0.2.1
 
-  * Fix for Django 1.7 from `@kevgathuku <https://github.com/kevgathuku>`_
+   Fix for Django 1.7 from `@kevgathuku <https://github.com/kevgathuku>`_
