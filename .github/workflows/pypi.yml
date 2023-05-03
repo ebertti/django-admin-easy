@@ -20,14 +20,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install setuptools wheel twine
-      - name: Build package|
-          python -m pip install --upgrade pip
+      - name: Build package
+        run: | 
+          python setup.py sdist bdist_wheel
       - name: Save artifact
         uses: actions/upload-artifact@v2
         with:
           name: dist
           path: './dist'
-
 
   pypi-publish:
     name: Upload release to PyPI
