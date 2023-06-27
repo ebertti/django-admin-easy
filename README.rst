@@ -470,3 +470,10 @@ Changelog
 * 0.2.1
 
    Fix for Django 1.7 from `@kevgathuku <https://github.com/kevgathuku>`_
+
+
+Star History
+------------
+
+.. image:: https://api.star-history.com/svg?repos=ebertti/django-admin-easy&type=Date
+  :target: https://star-history.com/#ebertti/django-admin-easy&Date
