@@ -7,7 +7,7 @@ setup(
     url='http://github.com/ebertti/django-admin-easy/',
     author='Ezequiel Bertti',
     author_email='ebertti@gmail.com',
-    install_requires=['django',],
+    install_requires=['Django>=4.2', 'model-bakery>=1.4.0', 'Sphinx>=5.2.3', 'Pillow>=9.2.0', 'tox>=4.2.0', 'coverage>=7.2.0',],
     packages=find_packages(exclude=('test_app', 'test_project')),
     include_package_data=True,
     license='MIT License',
