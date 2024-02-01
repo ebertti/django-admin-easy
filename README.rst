@@ -93,7 +93,7 @@ With **django-admin-easy** you can easily create this field with less lines:
         fields = ('sum_method', 'some_img', 'is_true')
 
         sum_method = easy.SimpleAdminField(lambda obj: '<b>%s</b>' % (obj.field1 + obj.field2 + obj.field3), 'Sum', 'field1', True)
-        some_img = easy.ImageAdminField('image', 'id')
+        some_img = easy.ImageAdminField('image')
         is_true = easy.BooleanAdminField('Positive', 'value')
 
 If you still prefer using a custom method, you can use our decorators, like this:

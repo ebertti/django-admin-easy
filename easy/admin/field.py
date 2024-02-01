@@ -184,7 +184,7 @@ class ImageAdminField(BaseAdminField):
 
     def __init__(self, attr, params=None, short_description=None, admin_order_field=None):
         self.attr = attr
-        self.params = params
+        self.params = params or {}
         super(ImageAdminField, self).__init__(short_description or attr, admin_order_field, True)
 
     def render(self, obj):
