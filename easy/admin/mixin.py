@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
-
-from easy.six import reverse, url
+from django.urls import re_path, reverse
 
 
 class MixinEasyViews(object):
@@ -13,10 +12,10 @@ class MixinEasyViews(object):
         urls = super(MixinEasyViews, self).get_urls()
 
         easy_urls = [
-            url(r'^(?P<pk>.+)/easy/(?P<action>.+)/$', self.admin_site.admin_view(self.easy_object_view),
+            re_path(r'^(?P<pk>.+)/easy/(?P<action>.+)/$', self.admin_site.admin_view(self.easy_object_view),
                 name='%s_%s_easy' % self._get_info()),
 
-            url(r'^easy/(?P<action>.+)/$', self.admin_site.admin_view(self.easy_list_view),
+            re_path(r'^easy/(?P<action>.+)/$', self.admin_site.admin_view(self.easy_list_view),
                 name='%s_%s_easy' % self._get_info()),
         ]
 

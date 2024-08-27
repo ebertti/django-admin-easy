@@ -1,11 +1,13 @@
 from django.contrib.admin.templatetags.admin_urls import admin_urlname
 from django.db.models import Model, ImageField as ModelImageField, ForeignKey
 from django.conf import settings
+from django.forms.utils import flatatt
+from django.urls import reverse
 from django.utils.html import conditional_escape
 from django.template.loader import render_to_string
+from django.utils.http import urlencode
 from django.utils.safestring import mark_safe
 from .decorators import django_cache
-from easy.six import reverse, urlencode, flatatt
 
 from easy import helper
 

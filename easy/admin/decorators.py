@@ -1,4 +1,3 @@
-from collections.abc import Iterable
 from functools import wraps
 from django import utils as django_utils
 from django.core.cache import cache as django_cache
