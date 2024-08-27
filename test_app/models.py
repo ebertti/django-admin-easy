@@ -24,5 +24,5 @@ class Tag(models.Model):
     name = models.CharField(max_length=50)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveBigIntegerField()
+    object_id = models.BigIntegerField()
     generic = GenericForeignKey('content_type', 'object_id')
