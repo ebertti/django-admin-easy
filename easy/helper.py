@@ -71,7 +71,7 @@ def get_django_filter(django_filter: str, load: str = 'django') -> Callable:
         else:
             library_path = 'django.template.defaultfilters'
 
-        library = import_library(library_path)
+    library = import_library(library_path)
     filter_method = library.filters.get(django_filter)
     if not filter_method:
         raise Exception(f'filter "{django_filter}" not exist on {load} templatetag package')
@@ -109,22 +109,6 @@ def call_or_get(obj: object, attr: Union[str, Callable[[object], Any]], default:
     return ret
 
 
-def get_model_name(model: Model) -> str:
-    """
-    Retrieves the name of a Django model.
-
-    Args:
-        model (Model): The Django model object.
-
-    Returns:
-        str: The name of the model.
-    """
-    if django.VERSION < (1, 6):
-        return model._meta.module_name
-    else:
-        return model._meta.model_name
-
-
 def cache_method_key(model: Model, method_name: str) -> str:
     """
     Generates a cache key for a method of a model instance.
@@ -138,7 +122,7 @@ def cache_method_key(model: Model, method_name: str) -> str:
     """
     return EASY_CACHE_TEMPLATE_METHOD.format(
         model._meta.app_label,
-        get_model_name(model),
+        model._meta.model_name,
         method_name,
         model.pk
     )
@@ -156,6 +140,6 @@ def cache_object_key(model: Model) -> str:
     """
     return EASY_CACHE_TEMPLATE_OBJ.format(
         model._meta.app_label,
-        get_model_name(model),
+        model._meta.model_name,
         model.pk
     )

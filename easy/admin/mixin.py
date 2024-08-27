@@ -1,14 +1,13 @@
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 
-from easy.helper import get_model_name
 from easy.six import reverse, url
 
 
 class MixinEasyViews(object):
 
     def _get_info(self):
-        return self.model._meta.app_label, get_model_name(self.model)
+        return self.model._meta.app_label, self.model._meta.model_name
 
     def get_urls(self):
         urls = super(MixinEasyViews, self).get_urls()
