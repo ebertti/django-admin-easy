@@ -40,7 +40,7 @@ Installation
 
 1. Requirements: **Django > 1.8** and **Python > 3.5**
 
-2. ``pip install django-admin-easy==0.7.0``
+2. ``pip install django-admin-easy==0.8.0``
 
 
 * For **Django < 1.8** or **Python 2.x**
@@ -266,6 +266,15 @@ More Examples
         link2 = easy.LinkChangeListAdminField('app_label', 'model_name', 'attribute_to_text',
                                               {'field_name':'dynamic_value_model'},
                                               {'another_field': 'static_value'})
+
+        # render link to generic content type fields
+        # don't forget to use select_related with content-type to avoid N+1 queries like example below
+        generic = easy.GenericForeignKeyAdminField('generic')
+
+        # Example if your model has a field like this:
+        # content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+        def queryset(self, queryset):
+            return queryset.select_related('content_type')
 
         # display image of some model
         image1 = easy.ImageAdminField('image', {'image_attrs':'attr_value'})

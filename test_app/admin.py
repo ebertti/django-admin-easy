@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.http.response import HttpResponse
 import easy
-from test_app.models import Choice, Question, Poll
+from test_app.models import Choice, Question, Poll, Tag
 
 
 class ChoiceInline(admin.StackedInline):
@@ -39,5 +39,11 @@ class PollAdmin(easy.MixinEasyViews, admin.ModelAdmin):
 
         return HttpResponse('test is ok with %s' % (args or 'list'))
 
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'generic_link')
+
+    generic_link = easy.GenericForeignKeyAdminField('generic', cache_content_type=True)
+
 admin.site.register(Poll, PollAdmin)
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(Tag, TagAdmin)

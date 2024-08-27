@@ -2,10 +2,11 @@ import uuid
 import django
 
 from django.contrib.admin import AdminSite
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.backends.db import SessionStore
 from django.http.request import HttpRequest, QueryDict
 from django import test
-from django.utils.datetime_safe import datetime, time
 from django.utils.safestring import SafeData
 from easy.six import urlencode
 from model_bakery import baker
@@ -13,7 +14,12 @@ from model_bakery import baker
 import easy
 from easy.helper import Nothing
 from test_app.admin import PollAdmin
-from test_app.models import Question, Poll
+from test_app.models import Question, Poll, Tag
+
+if django.VERSION < (5, 0):
+    from django.utils.datetime_safe import datetime
+else:
+    from django.utils.timezone import datetime
 
 
 class TestSimpleAdminField(test.TestCase):
@@ -119,6 +125,70 @@ class TestForeignKeyAdminField(test.TestCase):
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
+
+class TestGenericForeignKeyAdminField(test.TestCase):
+
+    def test_generic_field(self):
+        user = baker.make(
+            User
+        )
+
+        tag = baker.make(
+            Tag,
+            name='Eba!',
+            generic=user
+        )
+
+        custom_field = easy.GenericForeignKeyAdminField('generic')
+        ret = custom_field.render(tag)
+
+        if django.VERSION < (1, 9):
+            expected = u'<a href="/admin/auth/user/1/">1 | usuário</a>'
+        elif django.VERSION < (2, 0):
+            expected = u'<a href="/admin/auth/user/1/change/">1 | usuário</a>'
+        else:
+            expected = u'<a href="/admin/auth/user/1/change/">1 | usuário</a>'
+
+        self.assertEqual(expected, ret)
+        self.assertTrue(custom_field.allow_tags)
+
+    def test_generic_field_with_cache(self):
+        ct = ContentType.objects.get_for_model(User)
+
+        tags = baker.make(
+            Tag,
+            _quantity=10,
+            object_id = 1,
+            content_type_id = ct.pk
+        )
+
+        with self.assertNumQueries(1):
+            custom_field = easy.GenericForeignKeyAdminField('generic', cache_content_type=True)
+            for tag in tags:
+                ret = custom_field.render(tag)
+
+    def test_generic_field_with_related_attr(self):
+        ct = ContentType.objects.get_for_model(User)
+
+        user = baker.make(
+            User,
+            username='eric'
+        )
+
+        tag = baker.make(
+            Tag,
+            generic=user
+        )
+
+        custom_field = easy.GenericForeignKeyAdminField('generic', cache_content_type=True, related_attr='username')
+        ret = custom_field.render(tag)
+
+        if django.VERSION < (1, 9):
+            expected = u'<a href="/admin/auth/user/1/">eric</a>'
+        elif django.VERSION < (2, 0):
+            expected = u'<a href="/admin/auth/user/1/change/">eric</a>'
+        else:
+            expected = u'<a href="/admin/auth/user/1/change/">eric</a>'
 
 
 class TestRawIdAdminField(test.TestCase):

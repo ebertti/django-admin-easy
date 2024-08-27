@@ -3,3 +3,4 @@ Sphinx
 Pillow
 tox
 coverage
+django-debug-toolbar

@@ -1,10 +1,11 @@
+from django.contrib.admin import display
 from django.contrib.admin.templatetags.admin_urls import admin_urlname
 from django.db.models import Model, ImageField as ModelImageField, ForeignKey
 from django.conf import settings
 from django.utils.html import conditional_escape
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
-
+from .decorators import django_cache
 from easy.six import reverse, urlencode, flatatt
 
 from easy import helper
@@ -102,6 +103,54 @@ class RawIdAdminField(SimpleAdminField):
             )
 
         return self.default
+
+class GenericForeignKeyAdminField(SimpleAdminField):
+
+    def __init__(self, attr, short_description=None, admin_order_field=None, default=None, cache_content_type=False, related_attr=None):
+        self.cache_content_type = cache_content_type
+        self.related_attr = related_attr
+        super(GenericForeignKeyAdminField, self).__init__(attr, short_description, admin_order_field, True, default)
+
+    def render(self, obj):
+        from django.contrib.contenttypes.fields import GenericForeignKey
+        ct = None
+        field = obj._meta.get_field(self.attr)
+
+        if not isinstance(field, GenericForeignKey):
+            return self.default
+
+        pk = getattr(obj, field.fk_field)
+        if not pk:
+            return self.default
+
+        if self.cache_content_type:
+            key = helper.EASY_CACHE_TEMPLATE_OBJ.format(
+                'content-type',
+                getattr(obj, f"{field.ct_field}_id")
+            )
+            ct = django_cache.get(key)
+            if not ct:
+                ct = getattr(obj, field.ct_field)
+                django_cache.set(key, ct)
+
+        if self.related_attr:
+            if self.cache_content_type:
+                related = ct.get_object_for_this_type(pk=pk)
+            else:
+                related = getattr(obj, self.attr)
+            display = helper.call_or_get(related, self.related_attr, self.default)
+        else:
+            display = pk
+
+        if not ct:
+            ct = getattr(obj, field.ct_field)
+        return '<a href="%s">%s</a>' % (
+            reverse(
+                'admin:%s_%s_change' % (ct.app_label, ct.model),
+                args=(pk,)
+            ),
+            "%s | %s" % (display, ct.name)
+        )
 
 
 class LinkChangeListAdminField(BaseAdminField):

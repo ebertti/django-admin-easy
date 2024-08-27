@@ -13,5 +13,6 @@ Sphinx = "*"
 Pillow = "*"
 tox = "*"
 coverage = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]

@@ -1,8 +1,8 @@
 from .admin import *  # noqa
 from .admin.field import (  # noqa
-    BaseAdminField, BooleanAdminField, ExternalLinkAdminField, ForeignKeyAdminField, RawIdAdminField, ImageAdminField,
-    LinkChangeListAdminField, SimpleAdminField, TemplateAdminField, ModelImageField, FilterAdminField,
-    CacheAdminField, FormatAdminField
+    BaseAdminField, BooleanAdminField, ExternalLinkAdminField, ForeignKeyAdminField, GenericForeignKeyAdminField,
+    RawIdAdminField, ImageAdminField, LinkChangeListAdminField, SimpleAdminField, TemplateAdminField,
+    ModelImageField, FilterAdminField, CacheAdminField, FormatAdminField
 )
 from .admin.decorators import action, short, smart, with_tags, utils, filter, cache, clear_cache  # noqa
 from .admin.mixin import MixinEasyViews  # noqa
