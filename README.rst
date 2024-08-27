@@ -10,7 +10,7 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 .. image:: https://img.shields.io/badge/django-2.0%202.1%202.2-brightgreen.svg
   :target: http://pypi.python.org/pypi/django-admin-easy
 
-.. image:: https://img.shields.io/badge/django-3.0%203.1%203.2%204.0%204.1%204.2-brightgreen.svg
+.. image:: https://img.shields.io/badge/django-3.0%203.1%203.2%204.0%204.1%204.2%205.0%205.1-brightgreen.svg
   :target: http://pypi.python.org/pypi/django-admin-easy
 
 .. image:: https://img.shields.io/badge/django-4.0%204.1%204.2-brightgreen.svg

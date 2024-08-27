@@ -83,12 +83,8 @@ class TestForeignKeyAdminField(test.TestCase):
 
         custom_field = easy.ForeignKeyAdminField('poll')
         ret = custom_field(question)
-        if django.VERSION < (1, 9):
-            expected = u'<a href="/admin/test_app/poll/1/">Poll object</a>'
-        elif django.VERSION < (2, 0):
-            expected = u'<a href="/admin/test_app/poll/1/change/">Poll object</a>'
-        else:
-            expected = u'<a href="/admin/test_app/poll/1/change/">Poll object (1)</a>'
+
+        expected = u'<a href="/admin/test_app/poll/1/change/">Poll object (1)</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
@@ -101,10 +97,7 @@ class TestForeignKeyAdminField(test.TestCase):
 
         custom_field = easy.ForeignKeyAdminField('poll', 'poll_id')
         ret = custom_field(question)
-        if django.VERSION < (1, 9):
-            expected = u'<a href="/admin/test_app/poll/1/">1</a>'
-        else:
-            expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
+        expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
@@ -118,13 +111,11 @@ class TestForeignKeyAdminField(test.TestCase):
         custom_field = easy.ForeignKeyAdminField('poll', 'poll.id')
         ret = custom_field(question)
 
-        if django.VERSION < (1, 9):
-            expected = u'<a href="/admin/test_app/poll/1/">1</a>'
-        else:
-            expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
+        expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
+
 
 class TestGenericForeignKeyAdminField(test.TestCase):
 
@@ -141,13 +132,7 @@ class TestGenericForeignKeyAdminField(test.TestCase):
 
         custom_field = easy.GenericForeignKeyAdminField('generic')
         ret = custom_field.render(tag)
-
-        if django.VERSION < (1, 9):
-            expected = u'<a href="/admin/auth/user/1/">1 | usuário</a>'
-        elif django.VERSION < (2, 0):
-            expected = u'<a href="/admin/auth/user/1/change/">1 | usuário</a>'
-        else:
-            expected = u'<a href="/admin/auth/user/1/change/">1 | usuário</a>'
+        expected = u'<a href="/admin/auth/user/1/change/">1 | usuário</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
@@ -182,13 +167,7 @@ class TestGenericForeignKeyAdminField(test.TestCase):
 
         custom_field = easy.GenericForeignKeyAdminField('generic', cache_content_type=True, related_attr='username')
         ret = custom_field.render(tag)
-
-        if django.VERSION < (1, 9):
-            expected = u'<a href="/admin/auth/user/1/">eric</a>'
-        elif django.VERSION < (2, 0):
-            expected = u'<a href="/admin/auth/user/1/change/">eric</a>'
-        else:
-            expected = u'<a href="/admin/auth/user/1/change/">eric</a>'
+        expected = u'<a href="/admin/auth/user/1/change/">eric</a>'
 
 
 class TestRawIdAdminField(test.TestCase):
@@ -200,12 +179,8 @@ class TestRawIdAdminField(test.TestCase):
 
         custom_field = easy.RawIdAdminField('poll')
         ret = custom_field(question)
-        if django.VERSION < (1, 9):
-            expected = u'<a href="/admin/test_app/poll/1/">1</a>'
-        elif django.VERSION < (2, 0):
-            expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
-        else:
-            expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
+
+        expected = u'<a href="/admin/test_app/poll/1/change/">1</a>'
 
         self.assertEqual(expected, ret)
         self.assertTrue(custom_field.allow_tags)
@@ -364,7 +339,7 @@ class TestDjangoUtilsDecorator(test.TestCase):
         def field(self, obj):
             return obj
 
-        self.assertEquals(field(object(), 'asd'), 'asd')
+        self.assertEqual(field(object(), 'asd'), 'asd')
 
     def test_function_not_exist(self):
 
@@ -381,7 +356,7 @@ class TestDjangoFilterDecorator(test.TestCase):
         def field(self, obj):
             return 10
 
-        self.assertEquals(field(object(), 'asd'), '10')
+        self.assertEqual(field(object(), 'asd'), '10')
 
     def test_decorators_from_detaultags(self):
 
@@ -389,7 +364,7 @@ class TestDjangoFilterDecorator(test.TestCase):
         def field(self, obj):
             return 'ezequiel bertti'
 
-        self.assertEquals(field(object(), 'asd'), 'Ezequiel bertti')
+        self.assertEqual(field(object(), 'asd'), 'Ezequiel bertti')
 
     def test_decorators_with_args(self):
 
@@ -397,7 +372,7 @@ class TestDjangoFilterDecorator(test.TestCase):
         def field(self, obj):
             return datetime(2016, 6, 25)
 
-        self.assertEquals(field(object(), 'asd'), '16-06-25')
+        self.assertEqual(field(object(), 'asd'), '16-06-25')
 
     def test_templatetag_not_exist(self):
 
@@ -433,20 +408,20 @@ class TestCacheDecorator(test.TestCase):
     def test_decorators(self):
         value2 = self.field(self.pool)
 
-        self.assertEquals(self.value, value2)
+        self.assertEqual(self.value, value2)
 
     def test_delete_cache(self):
         easy.clear_cache(self.pool)
         value2 = self.field(self.pool)
 
-        self.assertNotEquals(self.value, value2)
+        self.assertNotEqual(self.value, value2)
 
     def test_another_field(self):
 
         value1 = self.field(self.pool)
         value2 = self.field2(self.pool)
 
-        self.assertNotEquals(value1, value2)
+        self.assertNotEqual(value1, value2)
 
 
 class TestMultiDecorator(test.TestCase):
@@ -459,7 +434,7 @@ class TestMultiDecorator(test.TestCase):
             return datetime(2016, 6, 25)
 
         v = field(1, 1)
-        self.assertEquals(v, '16-06-25')
+        self.assertEqual(v, '16-06-25')
         self.assertIsInstance(v, SafeData)
 
 
@@ -502,9 +477,8 @@ class TestEasyView(test.TestCase):
 
     def test_register_view(self):
         views = self.admin.get_urls()
-        if django.VERSION < (1, 9):
-            self.assertEqual(len(views), 7)
-        elif django.VERSION < (2, 0) or django.VERSION > (3, 2):
+
+        if django.VERSION < (2, 0) or django.VERSION > (3, 2):
             self.assertEqual(len(views), 8)
         else:
             self.assertEqual(len(views), 9)

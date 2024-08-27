@@ -20,31 +20,17 @@ def deep_getattribute(obj, attr):
 
 def get_django_filter(django_filter, load='django'):
 
-    if django.VERSION < (1, 9):
-        from django.template.base import get_library
-        if load and not load == 'django':
-            library = get_library(load)
-        else:
-            library_path = 'django.template.defaultfilters'
-            if django.VERSION > (1, 8):
-                from django.template.base import import_library
-                library = import_library(library_path)
-            else:
-                from django.template import import_library
-                library = import_library(library_path)
-
+    from django.template.backends.django import get_installed_libraries
+    from django.template.library import import_library
+    libraries = get_installed_libraries()
+    if load and not load == 'django':
+        library_path = libraries.get(load)
+        if not library_path:
+            raise Exception('templatetag "{}" is not registered'.format(load))
     else:
-        from django.template.backends.django import get_installed_libraries
-        from django.template.library import import_library
-        libraries = get_installed_libraries()
-        if load and not load == 'django':
-            library_path = libraries.get(load)
-            if not library_path:
-                raise Exception('templatetag "{}" is not registered'.format(load))
-        else:
-            library_path = 'django.template.defaultfilters'
+        library_path = 'django.template.defaultfilters'
 
-        library = import_library(library_path)
+    library = import_library(library_path)
     filter_method = library.filters.get(django_filter)
     if not filter_method:
         raise Exception('filter "{}" not exist on {} templatetag package'.format(
@@ -70,18 +56,10 @@ def call_or_get(obj, attr, default=None):
 
     return ret
 
-
-def get_model_name(model):
-    if django.VERSION < (1, 6):
-        return model._meta.module_name
-    else:
-        return model._meta.model_name
-
-
 def cache_method_key(model, method_name):
     return EASY_CACHE_TEMPLATE_METHOD.format(
         model._meta.app_label,
-        get_model_name(model),
+        model._meta.model_name,
         method_name,
         model.pk
     )
@@ -90,6 +68,6 @@ def cache_method_key(model, method_name):
 def cache_object_key(model):
     return EASY_CACHE_TEMPLATE_OBJ.format(
         model._meta.app_label,
-        get_model_name(model),
+        model._meta.model_name,
         model.pk
     )
