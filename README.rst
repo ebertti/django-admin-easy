@@ -4,16 +4,8 @@ django-admin-easy
 Collection of admin fields, decorators and mixin to help to create computed or custom fields more friendly and easy way
 
 
-.. image:: https://img.shields.io/badge/django-1.8%201.9%201.10%201.11-brightgreen.svg
-  :target: http://pypi.python.org/pypi/django-admin-easy
 
-.. image:: https://img.shields.io/badge/django-2.0%202.1%202.2-brightgreen.svg
-  :target: http://pypi.python.org/pypi/django-admin-easy
-
-.. image:: https://img.shields.io/badge/django-3.0%203.1%203.2%204.0%204.1%204.2%205.0%205.1-brightgreen.svg
-  :target: http://pypi.python.org/pypi/django-admin-easy
-
-.. image:: https://img.shields.io/badge/django-4.0%204.1%204.2-brightgreen.svg
+.. image:: https://img.shields.io/badge/django-2.x%203.x%204.x%205.0%205.1-brightgreen.svg
   :target: http://pypi.python.org/pypi/django-admin-easy
 
 .. image:: https://img.shields.io/pypi/v/django-admin-easy.svg?style=flat
@@ -28,7 +20,7 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 .. image:: https://img.shields.io/pypi/status/django-admin-easy.svg?maxAge=2592000
   :target: http://pypi.python.org/pypi/django-admin-easy
 
-.. image:: https://github.com/ebertti/django-admin-easy/actions/workflows/test.yml/badge.svg
+.. image:: https://github.com/ebertti/django-admin-easy/actions/workflows/test.yml/badge.svg?maxAge=2592000
   :target: https://github.com/ebertti/django-admin-easy/actions/workflows/test.yml
 
 .. image:: https://img.shields.io/coveralls/ebertti/django-admin-easy/master.svg?maxAge=2592000
@@ -38,7 +30,7 @@ Collection of admin fields, decorators and mixin to help to create computed or c
 Installation
 ------------
 
-1. Requirements: **Django > 1.8** and **Python > 3.5**
+1. Requirements: **Django > 3** and **Python > 3**
 
 2. ``pip install django-admin-easy==0.8.0``
 
@@ -46,6 +38,10 @@ Installation
 * For **Django < 1.8** or **Python 2.x**
 
   ``pip install django-admin-easy==0.4.1``
+
+* For **Django < 2**
+
+  ``pip install django-admin-easy==0.7``
 
 
 How it Works
@@ -428,6 +424,14 @@ The django-admin-easy was originally created by Ezequiel Bertti `@ebertti <https
 
 Changelog
 ---------
+* 0.8.0
+
+   Add new field GenericForeignKeyAdminField
+   Add Support for Django 5.0 and 5.1
+   Add Support for Python 3.12
+   Drop support for Django < 2.0
+   Add typing and docstring (thanks `codeium <https://codeium.com/>`_)
+
 * 0.7.0
 
    Add support for Django 4.0, 4.1 and 4.2
