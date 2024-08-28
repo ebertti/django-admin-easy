@@ -1,8 +1,9 @@
 from django.contrib import admin
-from easy.six import url
+from django.urls import re_path
+
 # from debug_toolbar.toolbar import debug_toolbar_urls
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    re_path(r'^admin/', admin.site.urls),
 ] # + debug_toolbar_urls()

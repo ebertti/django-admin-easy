@@ -7,8 +7,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.backends.db import SessionStore
 from django.http.request import HttpRequest, QueryDict
 from django import test
+from django.utils.http import urlencode
 from django.utils.safestring import SafeData
-from easy.six import urlencode
 from model_bakery import baker
 
 import easy
@@ -284,7 +284,7 @@ class TestSmartDecorator(test.TestCase):
         def field(self, obj):
             return obj
 
-        self.assertEqual(field.short_description, 'test')
+        self.assertEqual(field .short_description, 'test')
         self.assertEqual(field.admin_order_field, 'test_field')
         self.assertEqual(field.allow_tags, True)
         self.assertEqual(field.boolean, True)
