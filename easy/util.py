@@ -1,15 +1,20 @@
+from __future__ import annotations
+
 from typing import Optional
 
+import django.http
 from django.shortcuts import redirect
 from django.contrib import messages
 
+HttpRequest: django.http.HttpRequest
+HttpResponseRedirect: django.http.HttpResponseRedirect
 
 def action_response(
-    request: "HttpRequest",
+    request: HttpRequest,
     message: Optional[str] = None,
     level: int = messages.INFO,
     keep_querystring: bool = True,
-) -> "HttpResponseRedirect":
+) -> HttpResponseRedirect:
     """
     Redirects the user to the current page with an optional message.
 

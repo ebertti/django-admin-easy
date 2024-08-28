@@ -284,7 +284,7 @@ class TestSmartDecorator(test.TestCase):
         def field(self, obj):
             return obj
 
-        self.assertEqual(field.short_description, 'test')
+        self.assertEqual(field .short_description, 'test')
         self.assertEqual(field.admin_order_field, 'test_field')
         self.assertEqual(field.allow_tags, True)
         self.assertEqual(field.boolean, True)

@@ -17,7 +17,7 @@ class Nothing(object):
         return u'Error'
 
 
-def deep_getattribute(obj: object, attr: str) -> object:
+def deep_getattribute(obj: object, attr: str) -> Union[object, Callable]:
     """
     Retrieves the value of a nested attribute from an object.
 
