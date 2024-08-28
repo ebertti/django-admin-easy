@@ -32,16 +32,16 @@ Installation
 
 1. Requirements: **Django > 3** and **Python > 3**
 
-2. ``pip install django-admin-easy==0.8.0``
+    ``pip install django-admin-easy==0.8.0``
 
 
 * For **Django < 1.8** or **Python 2.x**
 
-  ``pip install django-admin-easy==0.4.1``
+    ``pip install django-admin-easy==0.4.1``
 
 * For **Django < 2**
 
-  ``pip install django-admin-easy==0.7``
+    ``pip install django-admin-easy==0.7.0``
 
 
 How it Works
@@ -267,10 +267,13 @@ More Examples
         # don't forget to use select_related with content-type to avoid N+1 queries like example below
         generic = easy.GenericForeignKeyAdminField('generic')
 
-        # Example if your model has a field like this:
-        # content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-        def queryset(self, queryset):
-            return queryset.select_related('content_type')
+        def get_queryset(self, request):
+            qs = super().get_queryset(request)
+
+            return qs.select_related('content_type')
+
+        # or enable cache
+        generic = easy.GenericForeignKeyAdminField('generic', cache_content_type=True)
 
         # display image of some model
         image1 = easy.ImageAdminField('image', {'image_attrs':'attr_value'})
