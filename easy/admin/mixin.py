@@ -8,6 +8,7 @@ from django.urls import re_path, reverse
 
 HttpRequest: django.http.HttpRequest
 
+
 class MixinEasyViews(object):
 
     def _get_info(self):

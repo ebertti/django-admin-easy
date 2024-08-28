@@ -47,29 +47,15 @@ def get_django_filter(django_filter: str, load: str = 'django') -> Callable:
     Raises:
         Exception: If the specified Django filter or templatetag library does not exist.
     """
-    if django.VERSION < (1, 9):
-        from django.template.base import get_library
-        if load and load != 'django':
-            library = get_library(load)
-        else:
-            library_path = 'django.template.defaultfilters'
-            if django.VERSION > (1, 8):
-                from django.template.base import import_library
-                library = import_library(library_path)
-            else:
-                from django.template import import_library
-                library = import_library(library_path)
-
+    from django.template.backends.django import get_installed_libraries
+    from django.template.library import import_library
+    libraries = get_installed_libraries()
+    if load and not load == 'django':
+        library_path = libraries.get(load)
+        if not library_path:
+            raise Exception('templatetag "{}" is not registered'.format(load))
     else:
-        from django.template.backends.django import get_installed_libraries
-        from django.template.library import import_library
-        libraries = get_installed_libraries()
-        if load and load != 'django':
-            library_path = libraries.get(load)
-            if not library_path:
-                raise Exception(f'templatetag "{load}" is not registered')
-        else:
-            library_path = 'django.template.defaultfilters'
+        library_path = 'django.template.defaultfilters'
 
     library = import_library(library_path)
     filter_method = library.filters.get(django_filter)
@@ -107,7 +93,6 @@ def call_or_get(obj: object, attr: Union[str, Callable[[object], Any]], default:
         ret = default
 
     return ret
-
 
 def cache_method_key(model: Model, method_name: str) -> str:
     """
