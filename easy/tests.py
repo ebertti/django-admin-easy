@@ -16,11 +16,7 @@ from easy.helper import Nothing
 from test_app.admin import PollAdmin
 from test_app.models import Question, Poll, Tag
 
-if django.VERSION < (5, 0):
-    from django.utils.datetime_safe import datetime
-else:
-    from django.utils.timezone import datetime
-
+from django.utils.timezone import datetime
 
 class TestSimpleAdminField(test.TestCase):
 
