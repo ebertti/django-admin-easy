@@ -1,11 +1,18 @@
 import uuid
 import django
+import os
+import django
+from django.conf import settings
+
+if not settings.configured:
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'test_settings')
+    django.setup()
 
 from django.contrib.admin import AdminSite
 from django.contrib.sessions.backends.db import SessionStore
 from django.http.request import HttpRequest, QueryDict
 from django import test
-from django.utils.datetime_safe import datetime, time
+from datetime import datetime, time
 from django.utils.safestring import SafeData
 from easy.six import urlencode
 from model_bakery import baker
